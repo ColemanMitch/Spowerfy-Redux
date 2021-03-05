@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import queryString from '../node_modules/query-string';
 import Timer from './Timer';
 
 function App() {
@@ -24,8 +23,8 @@ function App() {
 
   const fetchMyData = async () => {
     setAuthenticated(true)
-    let parsed = queryString.parse(window.location.search);
-    let accessToken = parsed.access_token;
+    let parsed = new URLSearchParams(window.location.search)//queryString.parse();
+    let accessToken = parsed.get("access_token")//parsed.access_token;
     setMyToken(accessToken)
     if (!accessToken) {
       return;
@@ -172,8 +171,8 @@ function App() {
   return (
   partyStarted && userName
   ? <div className="party-time app-body">
-    <header>
-    <h1 className="app-title">Spowerfy 🍺</h1>
+    <header className="nonfixed-header">
+    <h1 className="app-title-nonfixed">Spowerfy 🍺</h1>
     </header>
     <h2>Currently Playing: </h2>
     
@@ -196,7 +195,7 @@ function App() {
     </div>
     :
     <div>
-    <header>
+    <header className="fixed-header">
     <h1 className="app-title">Spowerfy 🍺 </h1>  
     <button  style={{float:"right"}} onClick={() => startPlayback()}>Click to start your power hour</button>
     </header>
