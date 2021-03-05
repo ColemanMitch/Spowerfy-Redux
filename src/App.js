@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import queryString from 'query-string';
+import queryString from '../node_modules/query-string';
 import Timer from './Timer';
 
 function App() {
