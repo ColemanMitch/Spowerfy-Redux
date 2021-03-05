@@ -192,7 +192,7 @@ function App() {
       <button onClick={() =>{
       window.location = window.location.href.includes('localhost') 
               ? 'http://localhost:8888/login' 
-              : 'https://better-playlists-backend.herokuapp.com/login'}}>
+              : 'https://spowerfy-backend.herokuapp.com/login'}}>
               Click to authenticate</button>
       Hello {}
     </div>
