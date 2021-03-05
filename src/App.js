@@ -18,7 +18,7 @@ function App() {
   
   useEffect(() => {
     fetchMyData();
-  },[]);
+  },[authenticated]);
 
 
   const fetchMyData = async () => {
@@ -178,14 +178,13 @@ function App() {
     
     <Timer skipToNextSong={skipToNextSong} token={myToken} getCurrentlyPlaying={getCurrentlyPlaying}></Timer>
     <img src={playback.item.album.images[0].url}></img>
-
     <h3 style={{fontWeight: 'bold'}}>{playback.item.name}</h3>
     <h4 className="artist-name">{playback.item.album.artists[0].name}</h4> 
     
     
   </div>
   :
-   !authenticated
+   ! (userName && userDevices && playlists)
    ?
     <div>
       Spowerfy
