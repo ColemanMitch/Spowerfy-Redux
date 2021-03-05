@@ -187,10 +187,13 @@ function App() {
   :
    !authenticated
    ?
-    <div >
+    <div>
       Spowerfy
-      <button onClick={() => window.location = 'http://localhost:8888/login'}
-      >Click to authenticate</button>
+      <button onClick={() =>{
+      window.location = window.location.href.includes('localhost') 
+              ? 'http://localhost:8888/login' 
+              : 'https://better-playlists-backend.herokuapp.com/login'}}>
+              Click to authenticate</button>
       Hello {}
     </div>
     :
