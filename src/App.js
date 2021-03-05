@@ -13,6 +13,8 @@ function App() {
   const [playlists, setPlaylists] = useState([]);
   const [partyStarted, setPartyStarted] = useState(false);
   const [playback, setPlayback] = useState({});
+
+  const [currentlyPlaying, setCurrentlyPlaying] = useState(false);
   
   
   
@@ -72,7 +74,7 @@ function App() {
   }
 
   const skipToNextSong = async (token) => {
-    const skip = await fetch('https://api.spotify.com/v1/me/player/next',
+    await fetch('https://api.spotify.com/v1/me/player/next',
     {
       method: 'POST',
       headers: {'Authorization': 'Bearer ' + token},
@@ -81,13 +83,11 @@ function App() {
 
   function check(formID){
     var radios = document.getElementById(formID);
-
     for (var i = 0, len = radios.length; i < len; i++) {
          if (radios[i].checked) {
              return true;
          }
     }
-
     return false;
   }
   
@@ -125,27 +125,8 @@ function App() {
         body: JSON.stringify({"context_uri": playbackContext})
       });
       console.log(startDevicePlayPlaylist);
-      
-      /* // The third API call makes sure the player is playing the right playlist -- kinda kludgy, don't love it :/ 
-      const startDevicePlayPlaylist2 = await fetch(`https://api.spotify.com/v1/me/player/play`, 
-      {
-        method: 'PUT',
-        headers: {'Authorization': 'Bearer ' + myToken},
-        body: JSON.stringify({"context_uri": playbackContext})
-      });
-      console.log(startDevicePlayPlaylist2);
- */
-    /*  const playbackResponse = await fetch(`https://api.spotify.com/v1/me/player/currently-playing`, 
-      {
-        method: 'GET',
-        headers: {'Authorization': 'Bearer ' + myToken},
-      });
-      const playbackData = await playbackResponse.json();
-
-      setPlayback(playbackData) */
       setPartyStarted(true)
-      //console.log(playbackData)
-      //console.log(playback)
+
     }
   }
 
@@ -163,19 +144,19 @@ function App() {
     });
     const playbackData = await playbackResponse.json();
     console.log(token)
+    setCurrentlyPlaying(true)
     setPlayback(playbackData)
     console.log(playback)
   }
 
 
   return (
-  partyStarted && userName
+  partyStarted && currentlyPlaying
   ? <div className="party-time app-body">
     <header className="nonfixed-header">
     <h1 className="app-title-nonfixed">Spowerfy 🍺</h1>
     </header>
     <h2>Currently Playing: </h2>
-    
     <Timer skipToNextSong={skipToNextSong} token={myToken} getCurrentlyPlaying={getCurrentlyPlaying}></Timer>
     <img src={playback.item.album.images[0].url}></img>
     <h3 style={{fontWeight: 'bold'}}>{playback.item.name}</h3>
