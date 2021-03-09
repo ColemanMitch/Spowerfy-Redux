@@ -150,31 +150,28 @@ function App() {
   }
 
 
-  return (
-  partyStarted && currentlyPlaying
-  ? <div className="party-time app-body">
-    <header className="nonfixed-header">
-    <h1 className="app-title-nonfixed">Spowerfy 🍺</h1>
-    </header>
-    <h2>Currently Playing: </h2>
-    <Timer skipToNextSong={skipToNextSong} token={myToken} getCurrentlyPlaying={getCurrentlyPlaying}></Timer>
-    <img src={playback.item.album.images[0].url}></img>
-    <h3 style={{fontWeight: 'bold'}}>{playback.item.name}</h3>
-    <h4 className="artist-name">{playback.item.album.artists[0].name}</h4> 
-    
-    
+  return (partyStarted && currentlyPlaying 
+    ? 
+    <div className="party-time app-body">
+      <header className="nonfixed-header">
+      <h1 className="app-title-nonfixed">Spowerfy 🍺</h1>
+      </header>
+      <h2>Currently Playing: </h2>
+      <Timer skipToNextSong={skipToNextSong} token={myToken} getCurrentlyPlaying={getCurrentlyPlaying}></Timer>
+      <img src={playback.item.album.images[0].url} alt='album art of the current track'></img>
+      <h3 style={{fontWeight: 'bold'}}>{playback.item.name}</h3>
+      <h4 className="artist-name">{playback.item.album.artists[0].name}</h4> 
   </div>
   :
    ! (userName && userDevices && playlists)
    ?
     <div>
-      Spowerfy
+      <h1>Spowerfy</h1>
       <button onClick={() =>{
       window.location = window.location.href.includes('localhost') 
               ? 'http://localhost:8888/login' 
               : 'https://spowerfy-backend.herokuapp.com/login'}}>
               Click to authenticate</button>
-      Hello {}
     </div>
     :
     <div>
@@ -185,7 +182,7 @@ function App() {
     <div className="app-body">
     <h2>Hello {userName},</h2>
     <br></br>
-  <h3>Your available devices to play from are: </h3>   
+    <h3>Your available devices to play from are: </h3>   
       <ul>
         <form id="device-select">
       {userDevices.map((device) => (
