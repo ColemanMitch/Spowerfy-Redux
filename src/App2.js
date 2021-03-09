@@ -26,13 +26,12 @@ class App2 extends Component {
             myToken:accessToken
         });
         
-        if (!accessToken)
+        if (!accessToken) {
             return;
-
+        } 
+        else {
         const responseForMe = await fetch('https://api.spotify.com/v1/me', {
-            headers: {
-                'Authorization': 'Bearer ' + accessToken
-            }
+            headers: {'Authorization': 'Bearer ' + accessToken}
         });
         const userData = await responseForMe.json();
         this.setState({
@@ -41,10 +40,9 @@ class App2 extends Component {
             }
         });
 
-        const responseForDevices = await fetch('https://api.spotify.com/v1/me/player/devices', {
-            headers: {
-                'Authorization': 'Bearer ' + accessToken
-            }
+        const responseForDevices = await fetch('https://api.spotify.com/v1/me/player/devices', 
+        {
+            headers: {'Authorization': 'Bearer ' + accessToken}
         });
         const deviceData = await responseForDevices.json();
         this.setState({
@@ -61,6 +59,7 @@ class App2 extends Component {
             playlists: playlistData.items
         });
         console.log(this.state.playlists)
+        }
     
     }
 
