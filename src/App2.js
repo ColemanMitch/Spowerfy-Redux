@@ -103,14 +103,6 @@ class App2 extends Component {
               body: JSON.stringify({ "device_ids": [this.state.playbackDeviceId], "play": true})
             });
             console.log(startDeviceResponse);
-            // The second API call configures the context of the playback (i.e. which playlist)
-            const startDevicePlayPlaylist = await fetch(`https://api.spotify.com/v1/me/player/play`, 
-            {
-              method: 'PUT',
-              headers: {'Authorization': 'Bearer ' + this.state.myToken},
-              body: JSON.stringify({"context_uri": this.state.playlistURI})
-            });
-            console.log(startDevicePlayPlaylist)
             const shuffleResponse = await fetch(`https://api.spotify.com/v1/me/player/shuffle?state=true`,
             {
               method: 'PUT',
@@ -120,6 +112,15 @@ class App2 extends Component {
             this.setState({
                 partyStarted: true
             });
+            // The second API call configures the context of the playback (i.e. which playlist)
+            const startDevicePlayPlaylist = await fetch(`https://api.spotify.com/v1/me/player/play`, 
+            {
+              method: 'PUT',
+              headers: {'Authorization': 'Bearer ' + this.state.myToken},
+              body: JSON.stringify({"context_uri": this.state.playlistURI})
+            });
+            console.log(startDevicePlayPlaylist)
+            
        }
     }
 
@@ -173,53 +174,55 @@ class App2 extends Component {
             <p>Loading playback..</p>
             }
         </div>
-        :<p>turnt doin</p>
-        }
-        {this.state.user ?
-        <div>
-            <header className="fixed-header">
-            <h1 className="app-title">Spowerfy 🍺 </h1>  
-            <button  style={{float:"right"}} onClick={this.startPlayback}>Click to start your power hour</button>
-            </header>
-            <div className="app-body">
-            <h2>Hello {this.state.user.name},</h2>
-            <br></br>
-            <h3>Your available devices to play from are: </h3>
-            {this.state.devices ?
-            <ul>
-                <form id="device-select">
-            {this.state.devices.map((device) => (
-                <li className="device"><input type="radio" value={device.id} name="device" onClick={this.handleDevice}/>{device.name}</li>
-            ))}</form>
-            </ul>
-            :
-            <p>Loading devices...</p>
-            }
-            {this.state.playlists ?
-            <div className="playlist-container">
+        :<div>
+            {this.state.user ?
+            <div>
+                <header className="fixed-header">
+                <h1 className="app-title">Spowerfy 🍺 </h1>  
+                <button  style={{float:"right"}} onClick={this.startPlayback}>Click to start your power hour</button>
+                </header>
+                <div className="app-body">
+                <h2>Hello {this.state.user.name},</h2>
+                <br></br>
+                <h3>Your available devices to play from are: </h3>
+                {this.state.devices ?
                 <ul>
-                <form id="playlist-select" required>
-                {this.state.playlists.map((pl) => (
-                    <div className="playlist-div">
-                    <img className="playlist-images" src={pl.images[0].url} alt="Playlist art"></img>
-                    <li className="playlist-name"><input type="radio" value={pl.uri} name="playlists" onClick={this.handlePlaylist}/>{pl.name}</li>
-                    </div>
-                ))}
-                </form>
+                    <form id="device-select">
+                {this.state.devices.map((device) => (
+                    <li className="device"><input type="radio" value={device.id} name="device" onClick={this.handleDevice}/>{device.name}</li>
+                ))}</form>
                 </ul>
+                :
+                <p>Loading devices...</p>
+                }
+                {this.state.playlists ?
+                <div className="playlist-container">
+                    <ul>
+                    <form id="playlist-select" required>
+                    {this.state.playlists.map((pl) => (
+                        <div className="playlist-div">
+                        <img className="playlist-images" src={pl.images[0].url} alt="Playlist art"></img>
+                        <li className="playlist-name"><input type="radio" value={pl.uri} name="playlists" onClick={this.handlePlaylist}/>{pl.name}</li>
+                        </div>
+                    ))}
+                    </form>
+                    </ul>
+                </div>
+                : <p>Loading playlists...</p>
+                }
+            <hr></hr>
+                </div>
             </div>
-            : <p>Loading playlists...</p>
+            : <button onClick={() => {
+                window.location = window.location.href.includes('localhost') 
+                ? 'http://localhost:8888/login' 
+                : 'https://spowerfy-backend.herokuapp.com/login' }
             }
-      <hr></hr>
-            </div>
-        </div> : <button onClick={() => {
-            window.location = window.location.href.includes('localhost') 
-              ? 'http://localhost:8888/login' 
-              : 'https://spowerfy-backend.herokuapp.com/login' }
-          }
-          style={{padding: '20px', 'font-size': '50px', 'margin-top': '20px'}}>Sign in with Spotify</button>
+            style={{padding: '20px', 'font-size': '50px', 'margin-top': '20px'}}>Sign in with Spotify</button>
         }
-      </div>
+        </div>
+        }
+    </div>
     );
   }
 }
