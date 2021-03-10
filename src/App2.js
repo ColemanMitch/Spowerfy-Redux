@@ -164,7 +164,7 @@ class App2 extends Component {
         </header>
         <h2>Currently Playing: </h2>
         <Timer getCurrentlyPlaying={this.getCurrentlyPlaying} skipToNextSong={this.skipToNextSong} token={this.state.myToken}></Timer>
-            {this.state.playback ?
+            {this.state.playback && this.state.playback.item ?
             <div>
             <img src={this.state.playback.item.album.images[0].url} alt='album art of the current track'></img>
             <h3 style={{fontWeight: 'bold'}}>{this.state.playback.item.name}</h3>
