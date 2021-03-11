@@ -3,7 +3,7 @@ import React from 'react';
 class Timer extends React.Component {
     constructor() {
       super();
-      this.state = { time: {}, seconds: 15, songCount: 1};
+      this.state = { time: {}, seconds: 60, songCount: 1};
       this.timer = 0;
       this.startTimer = this.startTimer.bind(this);
       this.countDown = this.countDown.bind(this);
@@ -51,7 +51,7 @@ class Timer extends React.Component {
         console.log('we\'ve hit zero, time for next song')
         this.props.skipToNextSong(this.props.token);
         clearInterval(this.timer);
-        this.setState({time: {}, seconds: 15})
+        this.setState({time: {}, seconds: 60})
         let incrementCount = this.state.songCount+1;
         this.setState({songCount: incrementCount})
         let timeLeftVar = this.secondsToTime(this.state.seconds);
