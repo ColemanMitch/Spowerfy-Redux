@@ -3,9 +3,9 @@ import { TimerProps, TimerState } from './models/models';
 
 const START_TIME = 100;
 
-class Timer extends React.Component {
+class Timer extends React.Component<TimerProps, TimerState> {
 
-  state: TimerState = { time: { minutes: 1, seconds: 0 }, songCount: 1};
+  state = { time: { minutes: 1, seconds: 0 }, songCount: 1};
 
   constructor(props: TimerProps) {
     super(props);
@@ -19,17 +19,17 @@ class Timer extends React.Component {
   async startTimer() {
     // Loop through a list of [0,1,2,3...START_TIME-1]
     for (const num of Array(START_TIME).keys()) {
-      await setTimeout(this.tick, 1000, num);
+      // Set a tick to occur every 1.000 * n seconds
+      await setTimeout(this.tick, 1000*num, num);
     }
-    console.log('Done!');
   }
 
-  async tick(num: number) {
+  tick = async (num: number) => {
     // Unroll this.state.time into new object (basically clone it)
     let newTime = { ...this.state.time };
     if(this.state.time.seconds === 0) {
       if(this.state.time.minutes === 0) {
-        console.log('Next song?');
+        this.props.skipToNextSong();
         return;
       }
       newTime.minutes -= 1;

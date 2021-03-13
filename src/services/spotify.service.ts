@@ -4,15 +4,17 @@ const BASE_URL = 'https://api.spotify.com/v1';
 export class SpotifyService {
   private _accessToken: string | null = null;
 
-  private _userData = null;
-
   constructor() {
-    let parsed = new URLSearchParams(window.location.search) //queryString.parse();
-    this._accessToken = parsed.get("access_token")
+    let parsed = new URLSearchParams(window.location.search);
+    this._accessToken = parsed.get("access_token");
     
     if (!this._accessToken) {
       console.error('YIKES BOI, No access_token query param found');
     }
+  }
+
+  getAccessToken(): string | null {
+    return this._accessToken;
   }
 
   async fetchMe() {
@@ -23,12 +25,12 @@ export class SpotifyService {
 
   async fetchDevices() {
     return await fetch(`${BASE_URL}/me/player/devices`, {
-        headers: {'Authorization': 'Bearer ' + this._accessToken}
+      headers: {'Authorization': 'Bearer ' + this._accessToken}
     });
   }
 
   async fetchPlaylists() {
-    await await fetch(`${BASE_URL}/me/playlists?limit=50`, {
+    return await fetch(`${BASE_URL}/me/playlists?limit=50`, {
       headers: {'Authorization': 'Bearer ' + this._accessToken}
     });
   }
