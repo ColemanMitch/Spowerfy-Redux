@@ -11,3 +11,7 @@
 * OAuth
 * HTML
 * CSS 
+
+# Running locally
+`npm i`
+`npm start`
