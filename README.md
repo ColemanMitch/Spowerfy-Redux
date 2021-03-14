@@ -5,8 +5,8 @@
 #### It is also a refactor of an existing project that I built last year (2020) in Python with Flask which can be found linked [here](https://github.com/ColemanMitch/Spowerfy).
 
 #### Technologies used:
-* ReactJS
-* NodeJS
+* React
+* Node.js
 * Heroku
 * OAuth
 * HTML
