@@ -50,6 +50,7 @@ img {
 }
 
 input[type=text] {
+  font-family: Proxima Nova;
   margin-top: 1rem;
   padding: 0.25%;
   text-align: center;
@@ -67,8 +68,12 @@ input[type=text] {
   text-align: center;
   vertical-align: middle;
 }
+body{
+  font-family: Proxima Nova;
+}
 
 #sign-in-button {
+  font-family: Proxima Nova;
   background-color: rgb(30,208,94);
   color: white;
   border: rgb(201, 201, 201) solid 1px;
@@ -109,7 +114,7 @@ header {
 }
 button {
   margin-top: 1rem;
-
+  font-family: Proxima Nova;
 }
 
 .app-title {
@@ -242,6 +247,11 @@ button:hover, #sign-in-button:hover {
 	}
 }
 
+@font-face {
+  font-family: 'Proxima Nova';
+  src: local('Proxima Nova'), url(./fonts/Proxima-Nova-Black.otf) format('opentype');
+}
+
 #playlist-filter {
   align-items: center;
   background-color: rgb(255, 255, 255);
@@ -275,5 +285,6 @@ button:hover, #sign-in-button:hover {
   font-weight: 400;
   min-height: 38px;
   min-width: 50%;
+  font-family: Proxima Nova;
   /*min-height: 38px;*/
 }
