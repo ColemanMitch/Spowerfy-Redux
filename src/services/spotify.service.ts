@@ -9,7 +9,7 @@ export class SpotifyService {
     this._accessToken = parsed.get("access_token");
     
     if (!this._accessToken) {
-      console.error('YIKES BOI, No access_token query param found');
+      console.error('No access_token query param found');
     }
   }
 

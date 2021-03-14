@@ -1,11 +1,15 @@
 import React from 'react';
-import { TimerProps, TimerState } from './models/models';
+import { TimerCount, TimerProps, TimerState } from './models/models';
 
-const START_TIME = 100;
+const START_TIME: number = 10;
 
 class Timer extends React.Component<TimerProps, TimerState> {
 
-  state = { time: { minutes: 1, seconds: 0 }, songCount: 1};
+  initialTimer: TimerCount = {
+    ...this.createTimeObj(START_TIME)
+  }
+
+  state = { time: { ...this.initialTimer }, songCount: 1, ticking: false };
 
   constructor(props: TimerProps) {
     super(props);
@@ -13,15 +17,31 @@ class Timer extends React.Component<TimerProps, TimerState> {
   }
 
   componentDidMount() {
+    this.setState({
+      ticking: true
+    });
     this.startTimer();
+  }
+
+  componentDidUpdate() {
+    if(!this.state.ticking) {
+      this.startTimer();
+      this.setState({
+        ticking: true
+      });
+    }
   }
 
   async startTimer() {
     // Loop through a list of [0,1,2,3...START_TIME-1]
-    for (const num of Array(START_TIME).keys()) {
+    for (const num of Array(START_TIME+1).keys()) {
       // Set a tick to occur every 1.000 * n seconds
-      await setTimeout(this.tick, 1000*num, num);
+      await setTimeout(this.tick, 1000*(num+1), num);
     }
+  }
+
+  createTimeObj(seconds: number): TimerCount {
+    return { minutes: Math.floor(seconds/60), seconds: seconds % 60 };
   }
 
   tick = async (num: number) => {
@@ -30,6 +50,11 @@ class Timer extends React.Component<TimerProps, TimerState> {
     if(this.state.time.seconds === 0) {
       if(this.state.time.minutes === 0) {
         this.props.skipToNextSong();
+        this.setState({
+          time: this.createTimeObj(START_TIME),
+          songCount: this.state.songCount + 1,
+          ticking: false
+        });
         return;
       }
       newTime.minutes -= 1;
@@ -38,8 +63,7 @@ class Timer extends React.Component<TimerProps, TimerState> {
     newTime.seconds -= 1;
     this.setState({
       time: newTime
-    })
-    console.log('tick ', num);
+    });
   }
 
   render() {

@@ -1,6 +1,7 @@
 export interface TimerState {
   time: TimerCount; 
   songCount: number;
+  ticking: boolean;
 }
 
 export interface TimerProps {
