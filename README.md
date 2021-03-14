@@ -18,4 +18,4 @@
 * ~~Text filter for playlists~~
 * Clean up the rendering associated with playlist filtering 
 * Pause/play button for playback once playback has been started
-* Use Spotify font throughout
+* ~~Use Spotify font throughout~~
