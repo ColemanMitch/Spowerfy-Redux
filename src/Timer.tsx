@@ -44,15 +44,15 @@ class Timer extends React.Component<TimerProps, TimerState> {
 
   render() {
     return(
-        <div>
-      <div className="drink-counter" style={{float:"left"}}>
-      <h4>Currently on</h4>
-      <h1>Drink #{this.state.songCount}</h1> 
-      </div>
-      <div className="time-counter" style={{float:"right"}}>
-      <h4 >Time Remaining:</h4> 
-      <h1 >{this.state.time.minutes}m {this.state.time.seconds}s</h1>
-      </div>
+      <div>
+        <div className="drink-counter" style={{float:"left"}}>
+          <h4>Currently on</h4>
+          <h1>Drink #{this.state.songCount}</h1> 
+        </div>
+        <div className="time-counter" style={{float:"right"}}>
+          <h4 >Time Remaining:</h4> 
+          <h1 >{this.state.time.minutes}m {this.state.time.seconds}s</h1>
+        </div>
       </div>
     );
   }
