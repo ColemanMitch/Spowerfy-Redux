@@ -11,7 +11,7 @@ class App extends Component {
     this.state = {
         authenticated: false,
         serverData: {},
-        filterString: ''
+        filterString: "",
     }
     this.startPlayback = this.startPlayback.bind(this);
     this.getCurrentlyPlaying = this.getCurrentlyPlaying.bind(this);
@@ -162,7 +162,25 @@ class App extends Component {
         });
       }
 
+    handlePlaylistTextChange = (e) => {
+        console.log('handle change called')
+        console.log(e.target.value)
+        this.setState({filterString: e.target.value})
+    }
+
   render() {
+
+    let playlistToRender = 
+      this.state.user && 
+      this.state.playlists 
+        ? this.state.playlists.filter(playlist => {
+          let matchesPlaylist = playlist.name.toLowerCase().includes(
+            this.state.filterString.toLowerCase()) 
+          return matchesPlaylist
+        }) : []
+
+    console.log(playlistToRender)
+
     return (
       <div className="App">
         {this.state.partyStarted?
@@ -207,11 +225,13 @@ class App extends Component {
                 <div className="playlist-container">
                     <ul>
                     <h3>Select your playlist</h3>
-                    <Select
-                    placeholder={"Start typing here to filter for your playlist"}
-                    options={this.state.playlists.map(opt => ({ label: opt.name, value: opt.uri }))}/>
+                    <input id="playlist-filter"
+                    placeholder="Start typing to filter for your playlist"
+                    onChange={this.handlePlaylistTextChange }
+                    >
+                    </input>
                     <form id="playlist-select" required>
-                    {this.state.playlists.map((pl) => (
+                    {playlistToRender.map((pl) => (
                         <div className="playlist-div">
                         <img className="playlist-images" src={pl.images[0].url} alt="Playlist art"></img>
                         <li className="playlist-name"><input type="radio" value={pl.uri} name="playlists" onClick={this.handlePlaylist}/>{pl.name}</li>
