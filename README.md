@@ -11,3 +11,10 @@
 * OAuth
 * HTML
 * CSS 
+
+
+#### TO DO
+* ~~Dropdown for devices instead of radio buttons~~
+* Text filter for playlists
+* Pause/play button for playback once playback has been started
+* Use Spotify font throughout

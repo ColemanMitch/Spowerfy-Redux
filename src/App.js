@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Timer from './Timer';
+import Select from 'react-select';
+
 
 
 class App extends Component {
@@ -69,6 +71,11 @@ class App extends Component {
         console.log(e.target.value, this.state.playbackDeviceId)
     }
 
+    handleDeviceNew = (opt) => {
+        this.setState({playbackDeviceId: opt.value})
+        console.log(opt.label, opt.value)
+    }
+
     handlePlaylist  = (e) => {
         //setPlaybackDevice(device_id)
         this.setState({playlistURI: e.target.value})
@@ -86,8 +93,9 @@ class App extends Component {
     }
 
     async startPlayback() {
-        let playbackDeviceSelected = this.check('device-select')
+        let playbackDeviceSelected = this.state.playbackDeviceId //document.getElementsByClassName(" css-1uccc91-singleValue")[0].textContent === 'undefined'///this.check('device-select') ///
         let playlistSelected = this.check('playlist-select')
+        //console.log(document.getElementsByClassName(" css-1uccc91-singleValue")[0].textContent)
     
         console.log(playbackDeviceSelected, playlistSelected)
         if (!playbackDeviceSelected || !playlistSelected) {
@@ -184,13 +192,13 @@ class App extends Component {
                 <div className="app-body">
                 <h2>Hello {this.state.user.name},</h2>
                 <br></br>
-                <h3>Your available devices to play from are: </h3>
-                {this.state.devices ?
+                {this.state.devices ?                
                 <ul>
-                    <form id="device-select">
-                {this.state.devices.map((device) => (
-                    <li className="device"><input type="radio" value={device.id} name="device" onClick={this.handleDevice}/>{device.name}</li>
-                ))}</form>
+                <h3>Select your playback device</h3>
+                <Select id="playback-device-select"
+                defaultValue={false}
+                options={this.state.devices.map(opt => ({ label: opt.name, value: opt.id }))}
+                onChange={this.handleDeviceNew} />
                 </ul>
                 :
                 <p>Loading devices...</p>
@@ -198,6 +206,10 @@ class App extends Component {
                 {this.state.playlists ?
                 <div className="playlist-container">
                     <ul>
+                    <h3>Select your playlist</h3>
+                    <Select
+                    placeholder={"Start typing here to filter for your playlist"}
+                    options={this.state.playlists.map(opt => ({ label: opt.name, value: opt.uri }))}/>
                     <form id="playlist-select" required>
                     {this.state.playlists.map((pl) => (
                         <div className="playlist-div">
