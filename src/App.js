@@ -222,27 +222,30 @@ class App extends Component {
                 <p>Loading devices...</p>
                 }
                 {this.state.playlists ?
+                <div>
+                    <div className="playlist-select-div">
+                    <h3>Select your playlist</h3>
+                <input id="playlist-filter"
+                placeholder="Start typing to filter for your playlist"
+                onChange={this.handlePlaylistTextChange }
+                >
+                </input>
+                </div>
                 <div className="playlist-container">
                     <ul>
-                    <h3>Select your playlist</h3>
-                    <input id="playlist-filter"
-                    placeholder="Start typing to filter for your playlist"
-                    onChange={this.handlePlaylistTextChange }
-                    >
-                    </input>
                     <form id="playlist-select" required>
                     {playlistToRender.map((pl) => (
                         <div className="playlist-div">
                         <img className="playlist-images" src={pl.images[0].url} alt="Playlist art"></img>
-                        <li className="playlist-name"><input type="radio" value={pl.uri} name="playlists" onClick={this.handlePlaylist}/>{pl.name}</li>
+                        <li className="playlist-name"><h3 className="playlist-name-h3">{pl.name}</h3><input type="radio" value={pl.uri} name="playlists" onClick={this.handlePlaylist}/></li>
                         </div>
                     ))}
                     </form>
                     </ul>
                 </div>
+                </div>
                 : <p>Loading playlists...</p>
                 }
-            <hr></hr>
                 </div>
             </div>
             : 
@@ -260,6 +263,9 @@ class App extends Component {
         }
         </div>
         }
+        <footer>
+            <p>Made by <a href="https://www.github.com/ColemanMitch" >Cole Mitchell</a> & <a href="https://github.com/dwilliams27" >David Williams</a></p>
+            </footer>
     </div>
     );
   }

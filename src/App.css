@@ -5,17 +5,20 @@ li {
 .playlist-div {
   display: flex;
   flex-direction: row;
-  justify-content: left;
   border: rgb(133, 133, 133) 1px solid;
   border-radius: 5px;
-  max-width: 25%;
-  max-height: 10%;
-  padding: 5%;
-  margin: 5%
+  min-width: 50%;
+  max-height: 4%;
+  padding: 1%;
+  margin: 1%
+}
+
+.playlist-div:hover {
+  background-color: rgb(30,208,94);
 }
 
 .playlist-images {
-  height: 150px;
+  height: 200px;
   margin-right: 20px;
   margin-top: 10px;
 }
@@ -40,9 +43,24 @@ img {
 }
 
 .playlist-name {
-  font-size: 16px;
-  margin-top: 75px;
+  align-content: center;
+  vertical-align: middle;
+  justify-content: space-between;
+  font-size: 2rem;
+  display:flex;
+  flex-direction:row;
+  width:100%;
   list-style-type: none;
+}
+
+input[type=radio] {
+  max-width: 30px;
+  margin-top: 13.5%;
+  border: 0px;
+  width: 25%;
+  height: 2em;
+  flex-direction: row;
+  align-items: right;
 }
 
 .playlists-header {
@@ -58,6 +76,13 @@ input[type=text] {
   width:35%;
   height: 5%;
 }
+.playlist-select-div {
+  padding-inline-start: 40px;
+}
+#playlist-select{
+  min-width: 50%;
+}
+
 
 .device {
   margin-top: 1%;
@@ -126,14 +151,30 @@ button {
 }
 
 .playlist-container, form {
-  display: flex !important;
+  display: block;
   flex-direction: row !important;
   flex-wrap: wrap !important;
-  justify-content: space-around;
+  justify-content: center;
+  min-width: 20%;
+  margin-right: 5%;
+  margin-left: 5%;
 }
+
+.playlist-container {
+  min-height: 20rem;
+}
+
+
 
 .playlist-search {
   display: block !important;
+}
+
+.playlist-name-h3 {
+  display: flex;
+  vertical-align: middle !important;
+  flex-direction: row !important;
+  align-items: center;
 }
 
 
@@ -287,4 +328,21 @@ button:hover, #sign-in-button:hover {
   min-width: 50%;
   font-family: Proxima Nova;
   /*min-height: 38px;*/
+}
+
+footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: black;
+  color: white;
+  min-height: 20px;
+  max-height: 50px;
+  margin: 0;
+  padding-top: 0;
+  align-content: center;
+}
+
+a {
+  color: white;
 }
