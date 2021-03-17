@@ -5,8 +5,8 @@
 #### It is also a refactor of an existing project that I built last year (2020) in Python with Flask which can be found linked [here](https://github.com/ColemanMitch/Spowerfy).
 
 #### Technologies used:
-* ReactJS
-* NodeJS
+* React
+* Node.js
 * Heroku
 * OAuth
 * HTML
@@ -15,3 +15,10 @@
 # Running locally
 `npm i`
 `npm start`
+
+#### TO DO
+* ~~Dropdown for devices instead of radio buttons~~
+* ~~Text filter for playlists~~
+* Clean up the rendering associated with playlist filtering 
+* Pause/play button for playback once playback has been started
+* ~~Use Spotify font throughout~~
