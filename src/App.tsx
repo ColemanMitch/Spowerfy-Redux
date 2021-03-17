@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
+import { Component, SyntheticEvent } from 'react';
 import './App.css';
-import { AppState } from './models/models';
+import { AppState, Device } from './models/models';
 import { MeResponse, DevicesResponse, PlaylistsResponse, CurrentlyPlayingReponse, SpotifyReponse } from './models/responses';
 import { SpotifyService } from './services/spotify.service';
 import Timer from './Timer';
 
-class App extends Component<{}, AppState> {
+class App extends Component<void, AppState> {
   private spotifyService: SpotifyService;
 
   state: AppState;
 
-  constructor(props: {}) {
+  constructor(props: void) {
     super(props);
     this.state = {
       authenticated: false,
@@ -28,7 +28,7 @@ class App extends Component<{}, AppState> {
     this.skipToNextSong = this.skipToNextSong.bind(this)
   }
 
-  async componentDidMount() {      
+  componentDidMount(): void {      
     this.spotifyService.fetchMe().then(data => {
       data.json().then((json: MeResponse) => {
         this.logIfError(json);
@@ -63,25 +63,23 @@ class App extends Component<{}, AppState> {
     });
   }
 
-  logIfError(response: SpotifyReponse) {
+  logIfError(response: SpotifyReponse): void {
     if(response.error) {
       console.error(`ERROR: ${response.error.status} : ${response.error.message}`);
     }
   }
 
-  handleDevice = (e: any) => {
-    //setPlaybackDevice(device_id)
-    this.setState({playbackDeviceId: e.target.value})
-    console.log(e.target.value, this.state.playbackDeviceId)
+  handleDevice = (e: SyntheticEvent): void => {
+    const target = e.target as HTMLInputElement;
+    this.setState({playbackDeviceId: target.value})
   }
 
-  handlePlaylist = (e: any) => {
-    //setPlaybackDevice(device_id)
-    this.setState({playlistURI: e.target.value})
-    console.log(e.target.value, this.state.playlistURI)
+  handlePlaylist = (e: SyntheticEvent): void => {
+    const target = e.target as HTMLInputElement;
+    this.setState({playlistURI: target.value})
   }
 
-  async startPlayback() {
+  startPlayback(): void {
     if (!this.state.playbackDeviceId || !this.state.playlistURI) {
       alert('Select both a device and a playlist to get this party started!');
     } else {
@@ -96,14 +94,13 @@ class App extends Component<{}, AppState> {
           partyStarted: true
       });
       
-      // The second API call configures the context of the playback (i.e. which playlist)
-      const startDevicePlayPlaylist = this.spotifyService.startPlaylist(this.state.playlistURI).then(response => {
+      this.spotifyService.startPlaylist(this.state.playlistURI).then(response => {
         console.log(response);
       });
     }
   }
 
-  async fetchCurrentlyPlaying() {
+  fetchCurrentlyPlaying(): void {
     this.spotifyService.fetchCurrentlyPlaying().then(data => {
       data.json().then((json: CurrentlyPlayingReponse) => {
         if(json.item) {
@@ -117,13 +114,16 @@ class App extends Component<{}, AppState> {
     })
   }
 
-  async skipToNextSong() {
+  skipToNextSong(): void {
     // Wait for skip song call to finish, then read the body
-    const body = await (await this.spotifyService.skipSong()).body?.getReader().read();
-    if(body?.done) {
-      // Refresh currently playing since we know new song is now playing
-      this.fetchCurrentlyPlaying();
-    }
+    this.spotifyService.skipSong().then(res => {
+      res.body?.getReader().read().then(body => {
+        if(body?.done) {
+          // Refresh currently playing since we know new song is now playing
+          this.fetchCurrentlyPlaying();
+        }
+      })
+    })
   }
 
   render() {
@@ -161,7 +161,7 @@ class App extends Component<{}, AppState> {
                 {this.state.devices ?
                 <ul>
                   <form id="device-select">
-                    {this.state.devices.map((device: any) => (
+                    {this.state.devices.map((device: Device) => (
                       <li className="device" key={device.id}><input type="radio" value={device.id} name="device" onClick={this.handleDevice}/>{device.name}</li>
                     ))}
                   </form>
@@ -195,7 +195,7 @@ class App extends Component<{}, AppState> {
               </header>
               <button id="sign-in-button" className="center" onClick={() => {
                   window.location.assign(window.location.href.includes('localhost') 
-                  ? 'http://localhost:8888/login' 
+                  ? 'https://spowerfy-backend.herokuapp.com/login' 
                   : 'https://spowerfy-backend.herokuapp.com/login') 
                 }
               }

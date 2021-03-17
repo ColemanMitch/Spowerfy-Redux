@@ -1,7 +1,7 @@
 import React from 'react';
 import { TimerCount, TimerProps, TimerState } from './models/models';
 
-const START_TIME: number = 10;
+const START_TIME = 10;
 
 class Timer extends React.Component<TimerProps, TimerState> {
 
@@ -36,7 +36,7 @@ class Timer extends React.Component<TimerProps, TimerState> {
     // Loop through a list of [0,1,2,3...START_TIME-1]
     for (const num of Array(START_TIME+1).keys()) {
       // Set a tick to occur every 1.000 * n seconds
-      await setTimeout(this.tick, 1000*(num+1), num);
+      await setTimeout(this.tick, 1000*(num+1));
     }
   }
 
@@ -44,8 +44,8 @@ class Timer extends React.Component<TimerProps, TimerState> {
     return { minutes: Math.floor(seconds/60), seconds: seconds % 60 };
   }
 
-  tick = async (num: number) => {
-    let newTime = { ...this.state.time };
+  tick = async () => {
+    const newTime = { ...this.state.time };
     if(this.state.time.seconds === 0) {
       if(this.state.time.minutes === 0) {
         this.props.skipToNextSong();

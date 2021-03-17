@@ -5,7 +5,7 @@ export class SpotifyService {
   private _accessToken: string | null = null;
 
   constructor() {
-    let parsed = new URLSearchParams(window.location.search);
+    const parsed = new URLSearchParams(window.location.search);
     this._accessToken = parsed.get("access_token");
     
     if (!this._accessToken) {
