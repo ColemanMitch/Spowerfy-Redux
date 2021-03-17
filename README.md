@@ -12,6 +12,9 @@
 * HTML
 * CSS 
 
+# Running locally
+`npm i`
+`npm start`
 
 #### TO DO
 * ~~Dropdown for devices instead of radio buttons~~
