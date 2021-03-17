@@ -4,10 +4,6 @@ export interface TimerState {
   ticking: boolean;
 }
 
-export interface Event {
-  target: { value: string };
-}
-
 export interface TimerProps {
   skipToNextSong: () => void;
 }
