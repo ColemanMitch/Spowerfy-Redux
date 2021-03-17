@@ -194,7 +194,10 @@ class App extends Component<{}, AppState> {
                 <h1 className="app-title-nonfixed">Spowerfy 🍺</h1>
               </header>
               <button id="sign-in-button" className="center" onClick={() => {
-                  window.location.assign('https://spowerfy-backend.herokuapp.com/login') }
+                  window.location.assign(window.location.href.includes('localhost') 
+                  ? 'http://localhost:8888/login' 
+                  : 'https://spowerfy-backend.herokuapp.com/login') 
+                }
               }
               style={{'fontSize': '20px'}}>Sign in with Spotify</button>
             </div>
