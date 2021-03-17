@@ -59,7 +59,7 @@ export class SpotifyService {
     });
   }
 
-  async getCurrentlyPlaying() {
+  async fetchCurrentlyPlaying() {
     return await fetch(`https://api.spotify.com/v1/me/player/currently-playing`, 
     {
       method: 'GET',

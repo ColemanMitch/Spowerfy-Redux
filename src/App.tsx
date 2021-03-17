@@ -24,7 +24,7 @@ class App extends Component<{}, AppState> {
     this.spotifyService = new SpotifyService();
     
     this.startPlayback = this.startPlayback.bind(this);
-    this.getCurrentlyPlaying = this.getCurrentlyPlaying.bind(this);
+    this.fetchCurrentlyPlaying = this.fetchCurrentlyPlaying.bind(this);
     this.skipToNextSong = this.skipToNextSong.bind(this)
   }
 
@@ -103,12 +103,12 @@ class App extends Component<{}, AppState> {
     }
   }
 
-  async getCurrentlyPlaying() {
-    this.spotifyService.getCurrentlyPlaying().then(data => {
+  async fetchCurrentlyPlaying() {
+    this.spotifyService.fetchCurrentlyPlaying().then(data => {
       data.json().then((json: CurrentlyPlayingReponse) => {
-        if(json.song) {
+        if(json.item) {
           this.setState({
-            activeSong: json.song
+            activeSong: json.item
           })
         }
         console.log("Currently playing song");
@@ -118,7 +118,12 @@ class App extends Component<{}, AppState> {
   }
 
   async skipToNextSong() {
-    this.spotifyService.skipSong();
+    // Wait for skip song call to finish, then read the body
+    const body = await (await this.spotifyService.skipSong()).body?.getReader().read();
+    if(body?.done) {
+      // Refresh currently playing since we know new song is now playing
+      this.fetchCurrentlyPlaying();
+    }
   }
 
   render() {
@@ -130,71 +135,75 @@ class App extends Component<{}, AppState> {
         <h1 className="app-title-nonfixed">Spowerfy 🍺</h1>
         </header>
         <h2>Currently Playing: </h2>
-        <Timer getCurrentlyPlaying={this.getCurrentlyPlaying} skipToNextSong={this.skipToNextSong}></Timer>
-          {this.state.activeSong && this.state.activeSong.item ?
+        <Timer skipToNextSong={this.skipToNextSong}></Timer>
+          {this.state.activeSong ?
             <div>
-            <img src={this.state.activeSong.item.album.images[0].url} alt='album art of the current track'></img>
-            <h3 style={{fontWeight: 'bold'}}>{this.state.activeSong.item.name}</h3>
-            <h4 className="artist-name">{this.state.activeSong.item.album.artists[0].name}</h4> 
+            <img src={this.state.activeSong.album.images[0].url} alt='album art of the current track'></img>
+            <h3 style={{fontWeight: 'bold'}}>{this.state.activeSong.name}</h3>
+            <h4 className="artist-name">{this.state.activeSong.album.artists[0].name}</h4> 
             </div>
           :
             <p>Loading playback..</p>
           }
         </div>
-        :<div>
-          {this.state.user ?
+        :
           <div>
-            <header className="fixed-header">
-              <h1 className="app-title">Spowerfy 🍺</h1>  
-              <button  className="start-button" style={{float:"right"}} onClick={this.startPlayback}>Click to start your power hour</button>
-            </header>
-            <div className="app-body">
-            <h2>Hello {this.state.user.name},</h2>
-            <br></br>
-            <h3>Your available devices to play from are: </h3>
-            {this.state.devices ?
-            <ul>
-              <form id="device-select">
-                {this.state.devices.map((device: any) => (
-                  <li className="device" key={device.id}><input type="radio" value={device.id} name="device" onClick={this.handleDevice}/>{device.name}</li>
-                ))}
-              </form>
-            </ul>
-            :
-            <p>Loading devices...</p>
-            }
-            {this.state.playlists && this.state.playlists.length > 0 ?
-              <div className="playlist-container">
+            {this.state.user ?
+              <div>
+                <header className="fixed-header">
+                  <h1 className="app-title">Spowerfy 🍺</h1>  
+                  <button  className="start-button" style={{float:"right"}} onClick={this.startPlayback}>Click to start your power hour</button>
+                </header>
+                <div className="app-body">
+                <h2>Hello {this.state.user.name},</h2>
+                <br></br>
+                <h3>Your available devices to play from are: </h3>
+                {this.state.devices ?
                 <ul>
-                <form id="playlist-select">
-                {this.state.playlists.map((pl) => (
-                  <div className="playlist-div">
-                    <img className="playlist-images" src={pl.images[0]?.url} alt="Playlist art"></img>
-                    <li className="playlist-name"><input type="radio" value={pl.uri} name="playlists" onClick={this.handlePlaylist}/>{pl.name}</li>
-                    </div>
-                ))}
-                </form>
+                  <form id="device-select">
+                    {this.state.devices.map((device: any) => (
+                      <li className="device" key={device.id}><input type="radio" value={device.id} name="device" onClick={this.handleDevice}/>{device.name}</li>
+                    ))}
+                  </form>
                 </ul>
+                :
+                <p>Loading devices...</p>
+                }
+                {this.state.playlists && this.state.playlists.length > 0 ?
+                  <div className="playlist-container">
+                    <ul>
+                    <form id="playlist-select">
+                    {this.state.playlists.map((pl) => (
+                      <div className="playlist-div">
+                        <img className="playlist-images" src={pl.images[0]?.url} alt="Playlist art"></img>
+                        <li className="playlist-name"><h3 className="playlist-name-h3">{pl.name}</h3><input type="radio" value={pl.uri} name="playlists" onClick={this.handlePlaylist}/>{pl.name}</li>
+                        </div>
+                    ))}
+                    </form>
+                    </ul>
+                  </div>
+                : 
+                  <p>Loading playlists...</p>
+                }
+                <hr></hr>
               </div>
-            : 
-              <p>Loading playlists...</p>
-            }
-          <hr></hr>
-              </div>
-          </div>
+            </div>
           : 
-          <div className="login-app-body">
-          <header className="nonfixed-header">
-          <h1 className="app-title-nonfixed">Spowerfy 🍺</h1>
-          </header>
-          <button id="sign-in-button" className="center" onClick={() => {
-              window.location.assign('https://spowerfy-backend.herokuapp.com/login') }
+            <div className="login-app-body">
+              <header className="nonfixed-header">
+                <h1 className="app-title-nonfixed">Spowerfy 🍺</h1>
+              </header>
+              <button id="sign-in-button" className="center" onClick={() => {
+                  window.location.assign('https://spowerfy-backend.herokuapp.com/login') }
+              }
+              style={{'fontSize': '20px'}}>Sign in with Spotify</button>
+            </div>
           }
-          style={{'fontSize': '20px'}}>Sign in with Spotify</button>
-          </div>
-        }
         </div>
         }
+        <footer>
+          <p>Made by <a href="https://www.github.com/ColemanMitch" >Cole Mitchell</a> & <a href="https://github.com/dwilliams27" >David Williams</a></p>
+        </footer>
     </div>
     );
   }

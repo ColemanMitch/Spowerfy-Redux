@@ -22,5 +22,5 @@ export interface PlaylistsResponse extends SpotifyReponse {
 }
 
 export interface CurrentlyPlayingReponse extends SpotifyReponse {
-  song?: Song;
+  item?: Song;
 }

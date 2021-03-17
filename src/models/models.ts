@@ -5,7 +5,6 @@ export interface TimerState {
 }
 
 export interface TimerProps {
-  getCurrentlyPlaying: () => void;
   skipToNextSong: () => void;
 }
 
@@ -28,10 +27,6 @@ export interface AppState {
 }
 
 export interface Song {
-  item: Item;
-}
-
-export interface Item {
   album: Album;
   name: string;
 }

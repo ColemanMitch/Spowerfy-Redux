@@ -45,7 +45,6 @@ class Timer extends React.Component<TimerProps, TimerState> {
   }
 
   tick = async (num: number) => {
-    // Unroll this.state.time into new object (basically clone it)
     let newTime = { ...this.state.time };
     if(this.state.time.seconds === 0) {
       if(this.state.time.minutes === 0) {
