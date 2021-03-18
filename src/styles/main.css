@@ -14,6 +14,13 @@ li {
   padding: 1%;
   margin: 1%; }
 
+.playlist-div:last-child {
+  margin-bottom: 0; }
+
+ul {
+  margin-bottom: 0;
+  padding-bottom: 1rem; }
+
 .playlist-div:hover {
   background-color: #1ed05e; }
 
@@ -249,6 +256,7 @@ button:hover, #sign-in-button:hover {
 #playlist-filter {
   align-items: center;
   margin: auto;
+  margin-top: 1rem;
   background-color: white;
   border-bottom-color: #cccccc;
   border-bottom-left-radius: 4px;
@@ -278,7 +286,7 @@ button:hover, #sign-in-button:hover {
   font-variant-ligatures: normal;
   font-variant-numeric: normal;
   font-weight: 400;
-  min-height: 38px;
+  min-height: 50px;
   min-width: 50%;
   font-family: Proxima Nova;
   /*min-height: 38px;*/ }
