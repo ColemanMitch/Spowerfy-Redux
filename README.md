@@ -13,7 +13,12 @@
 * CSS 
 
 # Running locally
+See the README in the backend folder to get spotify api credentials. Then from the `backend` folder, run:
+`npm start`
+
+Then start the frontend by running these from the root:
 `npm i`
+`npm run-script build`
 `npm start`
 
 #### TO DO

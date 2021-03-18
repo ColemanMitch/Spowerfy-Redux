@@ -1,3 +1,5 @@
+import { SyntheticEvent } from "react";
+
 export interface TimerState {
   time: TimerCount; 
   songCount: number;
@@ -15,15 +17,27 @@ export interface TimerCount {
 
 export interface AppState {
   authenticated: boolean;
-  serverData?: Object;
+  serverData?: unknown;
   filterString: string;
   playbackDeviceId: string;
-  playlistURI: string;
-  playlists: any[];
+  activePlaylist?: Playlist;
+  playlists: Playlist[];
+  filteredPlaylists: Playlist[];
   partyStarted: boolean;
   user?: User;
   activeSong?: Song;
   devices: Device[];
+  songLoaded: false;
+}
+
+export interface PlaylistsProps {
+  playlists: Playlist[];
+  activePlaylist?: Playlist;
+  setPlaylists: (playlist: Playlist) => void;
+}
+
+export interface PlaylistsState {
+  playlistFilter: string;
 }
 
 export interface Song {

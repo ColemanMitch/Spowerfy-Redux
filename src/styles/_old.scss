@@ -1,4 +1,8 @@
-li {
+
+
+a {
+  color: white;
+}li {
   vertical-align: middle;
 }
 
@@ -291,10 +295,6 @@ button:hover, #sign-in-button:hover {
 @font-face {
   font-family: 'Proxima Nova';
   src: local('Proxima Nova'), url(./fonts/Proxima-Nova-Black.otf) format('opentype');
-}
-
-#playback-device-select {
-  margin: auto;
 }
 
 #device-dropdown {

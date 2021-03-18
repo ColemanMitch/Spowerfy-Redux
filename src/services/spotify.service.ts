@@ -17,58 +17,58 @@ export class SpotifyService {
     return this._accessToken;
   }
 
-  async fetchMe() {
-    return await fetch(`${BASE_URL}/me`, {
+  fetchMe() {
+    return fetch(`${BASE_URL}/me`, {
       headers: {'Authorization': 'Bearer ' + this._accessToken}
     });
   }
 
-  async fetchDevices() {
-    return await fetch(`${BASE_URL}/me/player/devices`, {
+  fetchDevices() {
+    return fetch(`${BASE_URL}/me/player/devices`, {
       headers: {'Authorization': 'Bearer ' + this._accessToken}
     });
   }
 
-  async fetchPlaylists() {
-    return await fetch(`${BASE_URL}/me/playlists?limit=50`, {
+  fetchPlaylists() {
+    return fetch(`${BASE_URL}/me/playlists?limit=50`, {
       headers: {'Authorization': 'Bearer ' + this._accessToken}
     });
   }
 
-  async useDevice(deviceID: string) {
-    return await fetch(`${BASE_URL}/me/player`, {
+  useDevice(deviceID: string) {
+    return fetch(`${BASE_URL}/me/player`, {
       method: 'PUT',
       headers: {'Authorization': 'Bearer ' + this._accessToken},
       body: JSON.stringify({ "device_ids": [deviceID], "play": true})
     });
   }
 
-  async shuffle() {
-    return await fetch(`${BASE_URL}/me/player/shuffle?state=true`,
+  shuffle() {
+    return fetch(`${BASE_URL}/me/player/shuffle?state=true`,
     {
       method: 'PUT',
       headers: {'Authorization': 'Bearer ' + this._accessToken},
     });
   }
 
-  async skipSong() {
-    return await fetch('https://api.spotify.com/v1/me/player/next',
+  skipSong() {
+    return fetch('https://api.spotify.com/v1/me/player/next',
     {
       method: 'POST',
       headers: {'Authorization': 'Bearer ' + this._accessToken},
     });
   }
 
-  async fetchCurrentlyPlaying() {
-    return await fetch(`https://api.spotify.com/v1/me/player/currently-playing`, 
+  fetchCurrentlyPlaying() {
+    return fetch(`https://api.spotify.com/v1/me/player/currently-playing`, 
     {
       method: 'GET',
       headers: {'Authorization': 'Bearer ' + this._accessToken},
     });
   }
 
-  async startPlaylist(playlistURI: string) {
-    return await fetch(`https://api.spotify.com/v1/me/player/play`, 
+  startPlaylist(playlistURI: string) {
+    return fetch(`https://api.spotify.com/v1/me/player/play`, 
     {
       method: 'PUT',
       headers: {'Authorization': 'Bearer ' + this._accessToken},
