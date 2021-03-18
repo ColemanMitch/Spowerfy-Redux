@@ -1,4 +1,4 @@
-import './App.css';
+import './styles/main.css';
 import { Component, SyntheticEvent } from 'react';
 import Select from 'react-select';
 import { AppState } from './models/models';
@@ -161,7 +161,7 @@ class App extends Component<void, AppState> {
                   <h2>Hello {this.state.user.name},</h2>
                   <br></br>
                   { this.state.devices ?
-                  <ul>
+                  <ul id="device-dropdown">
                     <h3>Select your playback device</h3>
                     <Select id="playback-device-select"
                       options={this.state.devices.map(device => ({ label: device.name, value: device.id }))}
