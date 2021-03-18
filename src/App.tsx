@@ -88,14 +88,17 @@ class App extends Component<void, AppState> {
     } else {
       this.spotifyService.useDevice(this.state.playbackDeviceId).then(res => {
         if (res.status === 204) {
-          this.spotifyService.startPlaylist(this.state.activePlaylist?.uri ?? '').then(() => {
+          setTimeout(() => this.spotifyService.startPlaylist(this.state.activePlaylist?.uri ?? '').then(() => {
+            // TODO: Fix using timeout here
             this.spotifyService.shuffle().then(() => {
               this.setState({
                 partyStarted: true
               });
               setTimeout(() => this.fetchCurrentlyPlaying(), 1000);
+              // Sometimes currently playing fro spotify doesnt update for a bit
+              setTimeout(() => this.fetchCurrentlyPlaying(), 2500);
             });
-          });
+          }), 1000);
         }
       });
     }
