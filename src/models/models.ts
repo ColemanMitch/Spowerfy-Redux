@@ -1,5 +1,3 @@
-import { SyntheticEvent } from "react";
-
 export interface TimerState {
   time: TimerCount; 
   songCount: number;

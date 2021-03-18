@@ -28,7 +28,7 @@ class App extends Component<void, AppState> {
     
     this.startPlayback = this.startPlayback.bind(this);
     this.fetchCurrentlyPlaying = this.fetchCurrentlyPlaying.bind(this);
-    this.skipToNextSong = this.skipToNextSong.bind(this)
+    this.skipToNextSong = this.skipToNextSong.bind(this);
   }
 
   componentDidMount(): void {      
@@ -37,7 +37,7 @@ class App extends Component<void, AppState> {
         if(json.display_name) {
           this.setState({
             user: { name: json.display_name }
-          })
+          });
         }
       });
     });
@@ -47,7 +47,7 @@ class App extends Component<void, AppState> {
         if(json.devices) {
           this.setState({
             devices: json.devices
-          })
+          });
         }
       })
     });
@@ -65,11 +65,12 @@ class App extends Component<void, AppState> {
   }
 
   handleDevice = (e): void => {
-    this.setState({playbackDeviceId: e.value})
+    // Trying to type this parameter is absolutely ridiculous, leaving as any
+    this.setState({playbackDeviceId: e.value});
   }
 
   setPlaylist = (playlist: Playlist): void => {
-    this.setState({activePlaylist: playlist})
+    this.setState({activePlaylist: playlist});
   }
 
   startPlayback(): void {
@@ -99,8 +100,8 @@ class App extends Component<void, AppState> {
             activeSong: json.item
           });
         }
-      })
-    })
+      });
+    });
   }
 
   skipToNextSong(): void {
@@ -111,8 +112,8 @@ class App extends Component<void, AppState> {
           // Refresh currently playing since we know new song is now playing
           this.fetchCurrentlyPlaying();
         }
-      })
-    })
+      });
+    });
   }
 
   render() {
