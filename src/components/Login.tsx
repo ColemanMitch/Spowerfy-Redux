@@ -1,7 +1,7 @@
 import { LOGIN_URL, LOGIN_URL_LOCAL } from "../config/constants";
 
 const Login = () => {
-  return (<div className="login-app-body">
+  return <div className="login-app-body">
     <header className="nonfixed-header">
       <h1 className="app-title-nonfixed">Spowerfy 🍺</h1>
     </header>
@@ -12,7 +12,7 @@ const Login = () => {
       }
     }
     style={{'fontSize': '20px'}}>Sign in with Spotify</button>
-  </div>);
+  </div>;
 }
 
 export default Login;

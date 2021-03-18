@@ -1,13 +1,11 @@
 import './styles/main.css';
-import React, { Component } from 'react';
-import Select from 'react-select';
+import { Component } from 'react';
 import { AppState, Playlist } from './models/models';
-import { MeResponse, DevicesResponse, PlaylistsResponse, CurrentlyPlayingReponse, SpotifyReponse } from './models/responses';
+import { MeResponse, DevicesResponse, PlaylistsResponse, CurrentlyPlayingReponse } from './models/responses';
 import { SpotifyService } from './services/spotify.service';
 import Timer from './Timer';
-import { LOGIN_URL, LOGIN_URL_LOCAL } from './config/constants';
-import Playlists from './components/Playlists';
 import Login from './components/Login';
+import SelectMusicPage from './components/SelectMusicPage';
 
 class App extends Component<void, AppState> {
   private spotifyService: SpotifyService;
@@ -70,7 +68,7 @@ class App extends Component<void, AppState> {
     this.setState({playbackDeviceId: e.value})
   }
 
-  setPlaylists = (playlist: Playlist): void => {
+  setPlaylist = (playlist: Playlist): void => {
     this.setState({activePlaylist: playlist})
   }
 
@@ -140,31 +138,18 @@ class App extends Component<void, AppState> {
         :
           <div>
             { this.state.user ?
-              <div>
-                <header className="fixed-header">
-                  <h1 className="app-title">Spowerfy 🍺</h1>  
-                  <button className="start-button" style={{float:"right"}} onClick={this.startPlayback}>Click to start your power hour</button>
-                </header>
-                <div className="app-body">
-                  <h2>Hello {this.state.user.name},</h2>
-                  <br></br>
-                  { this.state.devices ?
-                  <ul id="device-dropdown">
-                    <h3>Select your playback device</h3>
-                    <Select id="playback-device-select"
-                      options={this.state.devices.map(device => ({ label: device.name, value: device.id }))}
-                      onChange={this.handleDevice} 
-                    />
-                  </ul>
-                  :
-                  <p>Loading devices...</p>
-                  }
-                  <Playlists playlists={this.state.playlists} activePlaylist={this.state.activePlaylist} setPlaylists={this.setPlaylists}/>
-              </div>
-            </div>
-          : 
-            <Login />
-          }
+              <SelectMusicPage 
+                devices={this.state.devices} 
+                playlists={this.state.playlists}
+                user={this.state.user}
+                activePlaylist={this.state.activePlaylist}
+                setPlaylist={this.setPlaylist} 
+                handleDevice={this.handleDevice}
+                startPlayback={this.startPlayback}
+              />
+            : 
+              <Login />
+            }
           </div>
         }
         <footer>
