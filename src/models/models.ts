@@ -20,10 +20,9 @@ export interface AppState {
   serverData?: unknown;
   filterString: string;
   playbackDeviceId: string;
-  playlistURI: string;
+  activePlaylist?: Playlist;
   playlists: Playlist[];
   filteredPlaylists: Playlist[];
-  playlistFilter: string;
   partyStarted: boolean;
   user?: User;
   activeSong?: Song;
@@ -33,7 +32,8 @@ export interface AppState {
 
 export interface PlaylistsProps {
   playlists: Playlist[];
-  setPlaylists: (e: SyntheticEvent) => void;
+  activePlaylist?: Playlist;
+  setPlaylists: (playlist: Playlist) => void;
 }
 
 export interface PlaylistsState {

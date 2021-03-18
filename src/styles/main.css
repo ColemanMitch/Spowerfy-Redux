@@ -297,3 +297,6 @@ footer {
 
 a {
   color: white; }
+
+#playback-device-select {
+  margin: auto; }

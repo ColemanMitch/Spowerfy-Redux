@@ -1,7 +1,7 @@
 import './styles/main.css';
-import { Component, SyntheticEvent } from 'react';
+import { Component } from 'react';
 import Select from 'react-select';
-import { AppState } from './models/models';
+import { AppState, Playlist } from './models/models';
 import { MeResponse, DevicesResponse, PlaylistsResponse, CurrentlyPlayingReponse, SpotifyReponse } from './models/responses';
 import { SpotifyService } from './services/spotify.service';
 import Timer from './Timer';
@@ -19,13 +19,11 @@ class App extends Component<void, AppState> {
       authenticated: false,
       filterString: '',
       playbackDeviceId: '',
-      playlistURI: '',
       playlists: [],
       filteredPlaylists: [],
-      playlistFilter: '',
       partyStarted: false,
       devices: [],
-      songLoaded: false
+      songLoaded: false,
     }
     this.spotifyService = new SpotifyService();
     
@@ -80,19 +78,17 @@ class App extends Component<void, AppState> {
     this.setState({playbackDeviceId: e.value})
   }
 
-  setPlaylists = (e: SyntheticEvent): void => {
-    // TODO: Refactor to use e.target.addEventListener instead of needing to cast to HTMLInputElement
-    const target = e.target as HTMLInputElement;
-    this.setState({playlistURI: target.value})
+  setPlaylists = (playlist: Playlist): void => {
+    this.setState({activePlaylist: playlist})
   }
 
   startPlayback(): void {
-    if (!this.state.playbackDeviceId || !this.state.playlistURI) {
+    if (!this.state.playbackDeviceId || !this.state.activePlaylist) {
       alert('Select both a device and a playlist to get this party started!');
     } else {
       this.spotifyService.useDevice(this.state.playbackDeviceId).then(res => {
         if (res.status === 204) {
-          this.spotifyService.startPlaylist(this.state.playlistURI).then(() => {
+          this.spotifyService.startPlaylist(this.state.activePlaylist?.uri ?? '').then(() => {
             this.spotifyService.shuffle().then(() => {
               this.setState({
                 partyStarted: true
@@ -171,7 +167,7 @@ class App extends Component<void, AppState> {
                   :
                   <p>Loading devices...</p>
                   }
-                  <Playlists playlists={this.state.playlists} setPlaylists={this.setPlaylists}/>
+                  <Playlists playlists={this.state.playlists} activePlaylist={this.state.activePlaylist} setPlaylists={this.setPlaylists}/>
                 <hr></hr>
               </div>
             </div>
