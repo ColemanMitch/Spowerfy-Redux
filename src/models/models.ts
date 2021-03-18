@@ -1,5 +1,3 @@
-import { SyntheticEvent } from "react";
-
 export interface TimerState {
   time: TimerCount; 
   songCount: number;
@@ -33,11 +31,21 @@ export interface AppState {
 export interface PlaylistsProps {
   playlists: Playlist[];
   activePlaylist?: Playlist;
-  setPlaylists: (playlist: Playlist) => void;
+  setPlaylist: (playlist: Playlist) => void;
 }
 
 export interface PlaylistsState {
   playlistFilter: string;
+}
+
+export interface SelectMusicProps {
+  user: User;
+  devices: Device[];
+  playlists: Playlist[];
+  activePlaylist?: Playlist;
+  setPlaylist: (playlist: Playlist) => void;
+  handleDevice: (device: any) => void;
+  startPlayback: () => void;
 }
 
 export interface Song {

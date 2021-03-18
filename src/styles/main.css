@@ -37,16 +37,6 @@ img {
   display: block;
   text-align: center; }
 
-.playlist-name {
-  align-content: center;
-  vertical-align: middle;
-  justify-content: space-between;
-  font-size: 2rem;
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  list-style-type: none; }
-
 input[type=radio] {
   max-width: 30px;
   margin-top: 13.5%;
@@ -140,18 +130,6 @@ button {
   min-width: 20%;
   margin-right: 5%;
   margin-left: 5%; }
-
-.playlist-container {
-  min-height: 20rem; }
-
-.playlist-search {
-  display: block !important; }
-
-.playlist-name-h3 {
-  display: flex;
-  vertical-align: middle !important;
-  flex-direction: row !important;
-  align-items: center; }
 
 input[type=radio] {
   cursor: pointer;
@@ -306,5 +284,28 @@ ul {
   margin-bottom: 0;
   padding-bottom: 1rem; }
 
-#playback-device-select {
+.playback-device-select {
   margin: auto; }
+
+.playlist-container {
+  min-height: 20rem; }
+
+.playlist-search {
+  display: block !important; }
+
+.playlist-item {
+  align-content: center;
+  vertical-align: middle;
+  justify-content: space-between;
+  font-size: 32px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  list-style-type: none; }
+
+.playlist-name {
+  margin-top: auto;
+  margin-bottom: auto; }
+
+.playlist-radio {
+  margin-top: auto; }
