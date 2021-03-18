@@ -104,6 +104,7 @@ class App extends Component<void, AppState> {
     }
   }
 
+
   fetchCurrentlyPlaying() {
     this.spotifyService.fetchCurrentlyPlaying().then(data => {
       data.json().then((json: CurrentlyPlayingReponse) => {
@@ -122,7 +123,7 @@ class App extends Component<void, AppState> {
       res.body?.getReader().read().then(body => {
         if(body?.done) {
           // Refresh currently playing since we know new song is now playing
-          this.fetchCurrentlyPlaying();
+          setTimeout(() => this.fetchCurrentlyPlaying(), 1000);
         }
       })
     })
