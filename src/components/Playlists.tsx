@@ -7,8 +7,7 @@ class Playlists extends Component<PlaylistsProps, PlaylistsState> {
   constructor(props: PlaylistsProps) {
     super(props);
     this.state = {
-      playlistFilter: '',
-      filteredPlaylists: props.playlists
+      playlistFilter: ''
     }
   }
 
@@ -16,7 +15,6 @@ class Playlists extends Component<PlaylistsProps, PlaylistsState> {
     // TODO: Refactor to use e.target.addEventListener instead of needing to cast to HTMLInputElement
     const target = e.target as HTMLInputElement;
     this.setState({
-      filteredPlaylists: this.props.playlists.filter((playlist) => playlist.name.toLowerCase().includes(target.value.toLowerCase())),
       playlistFilter: target.value
     });
   }

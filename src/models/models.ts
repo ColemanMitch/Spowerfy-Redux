@@ -38,7 +38,6 @@ export interface PlaylistsProps {
 
 export interface PlaylistsState {
   playlistFilter: string;
-  filteredPlaylists: Playlist[];
 }
 
 export interface Song {
