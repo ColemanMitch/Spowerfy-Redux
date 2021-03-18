@@ -35,7 +35,6 @@ class App extends Component<void, AppState> {
   componentDidMount(): void {      
     this.spotifyService.fetchMe().then(data => {
       data.json().then((json: MeResponse) => {
-        this.logIfError(json);
         if(json.display_name) {
           this.setState({
             user: { name: json.display_name }
@@ -46,7 +45,6 @@ class App extends Component<void, AppState> {
 
     this.spotifyService.fetchDevices().then(data => {
       data.json().then((json: DevicesResponse) => {
-        this.logIfError(json);
         if(json.devices) {
           this.setState({
             devices: json.devices
@@ -57,7 +55,6 @@ class App extends Component<void, AppState> {
 
     this.spotifyService.fetchPlaylists().then(data => {
       data.json().then((json: PlaylistsResponse) => {
-        this.logIfError(json);
         if(json.items) {
           this.setState({
             playlists: json.items,
@@ -66,12 +63,6 @@ class App extends Component<void, AppState> {
         }
       });
     });
-  }
-
-  logIfError(response: SpotifyReponse): void {
-    if(response.error) {
-      console.error(`ERROR: ${response.error.status} : ${response.error.message}`);
-    }
   }
 
   handleDevice = (e): void => {
