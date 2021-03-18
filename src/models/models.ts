@@ -19,11 +19,14 @@ export interface AppState {
   filterString: string;
   playbackDeviceId: string;
   playlistURI: string;
-  playlists: any[];
+  playlists: Playlist[];
+  filteredPlaylists: Playlist[];
+  playlistFilter: string;
   partyStarted: boolean;
   user?: User;
   activeSong?: Song;
   devices: Device[];
+  songLoaded: false;
 }
 
 export interface Song {

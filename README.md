@@ -13,6 +13,10 @@
 * CSS 
 
 # Running locally
+First, start backend service. From the `backend` folder, run:
+`npm start`
+
+Then start the frontend by running these from the root:
 `npm i`
 `npm start`
 
