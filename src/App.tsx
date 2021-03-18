@@ -6,6 +6,7 @@ import { MeResponse, DevicesResponse, PlaylistsResponse, CurrentlyPlayingReponse
 import { SpotifyService } from './services/spotify.service';
 import Timer from './Timer';
 import { LOGIN_URL, LOGIN_URL_LOCAL } from './config/constants';
+import Playlists from './components/Playlists';
 
 class App extends Component<void, AppState> {
   private spotifyService: SpotifyService;
@@ -79,17 +80,10 @@ class App extends Component<void, AppState> {
     this.setState({playbackDeviceId: e.value})
   }
 
-  handlePlaylist = (e: SyntheticEvent): void => {
+  setPlaylists = (e: SyntheticEvent): void => {
+    // TODO: Refactor to use e.target.addEventListener instead of needing to cast to HTMLInputElement
     const target = e.target as HTMLInputElement;
     this.setState({playlistURI: target.value})
-  }
-
-  filterPlaylist = (e: SyntheticEvent): void => {
-    const target = e.target as HTMLInputElement;
-    this.setState({
-      filteredPlaylists: this.state.playlists.filter((playlist) => playlist.name.toLowerCase().includes(target.value.toLowerCase())),
-      playlistFilter: target.value
-    });
   }
 
   startPlayback(): void {
@@ -177,28 +171,7 @@ class App extends Component<void, AppState> {
                   :
                   <p>Loading devices...</p>
                   }
-                  <input id="playlist-filter" placeholder="Start typing to filter for your playlist" onChange={ this.filterPlaylist } value={ this.state.playlistFilter }/>
-                  { this.state.filteredPlaylists && this.state.filteredPlaylists.length > 0 ?
-                    <div>
-                      <div className="playlist-container">
-                        <ul>
-                        <form id="playlist-select">
-                        { this.state.filteredPlaylists.map((pl) => (
-                          <div className="playlist-div">
-                            <img className="playlist-images" src={pl.images[0]?.url} alt="Playlist art"></img>
-                            <li className="playlist-name">
-                              <h3 className="playlist-name-h3">{pl.name}</h3>
-                              <input type="radio" value={pl.uri} name="playlists" onClick={this.handlePlaylist}/>
-                            </li>
-                          </div>
-                        ))}
-                        </form>
-                        </ul>
-                      </div>
-                    </div>
-                  : 
-                    <p>Loading playlists...</p>
-                  }
+                  <Playlists playlists={this.state.playlists} setPlaylists={this.setPlaylists}/>
                 <hr></hr>
               </div>
             </div>
