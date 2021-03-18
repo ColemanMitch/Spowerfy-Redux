@@ -302,6 +302,10 @@ button:hover, #sign-in-button:hover {
   padding: 0; /* To remove default left padding */
 }
 
+ul {
+  margin-bottom: 0;
+}
+
 #playlist-filter {
   align-items: center;
   margin: auto;

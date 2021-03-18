@@ -168,7 +168,6 @@ class App extends Component<void, AppState> {
                   <p>Loading devices...</p>
                   }
                   <Playlists playlists={this.state.playlists} activePlaylist={this.state.activePlaylist} setPlaylists={this.setPlaylists}/>
-                <hr></hr>
               </div>
             </div>
           : 
