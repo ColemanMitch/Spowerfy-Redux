@@ -14,13 +14,6 @@ li {
   padding: 1%;
   margin: 1%; }
 
-.playlist-div:last-child {
-  margin-bottom: 0; }
-
-ul {
-  margin-bottom: 0;
-  padding-bottom: 1rem; }
-
 .playlist-div:hover {
   background-color: #1ed05e; }
 
@@ -305,6 +298,13 @@ footer {
 
 a {
   color: white; }
+
+.playlist-div:last-child {
+  margin-bottom: 0; }
+
+ul {
+  margin-bottom: 0;
+  padding-bottom: 1rem; }
 
 #playback-device-select {
   margin: auto; }

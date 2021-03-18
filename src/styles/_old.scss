@@ -305,6 +305,7 @@ button:hover, #sign-in-button:hover {
 #playlist-filter {
   align-items: center;
   margin: auto;
+  margin-top: 1rem;
   background-color: rgb(255, 255, 255);
   border-bottom-color: rgb(204, 204, 204);
   border-bottom-left-radius: 4px;
@@ -334,7 +335,7 @@ button:hover, #sign-in-button:hover {
   font-variant-ligatures: normal;
   font-variant-numeric: normal;
   font-weight: 400;
-  min-height: 38px;
+  min-height: 50px;
   min-width: 50%;
   font-family: Proxima Nova;
   /*min-height: 38px;*/
@@ -356,3 +357,10 @@ footer {
 a {
   color: white;
 }
+
+.playlist-div:last-child {
+  margin-bottom: 0; }
+
+ul {
+  margin-bottom: 0;
+  padding-bottom: 1rem; }
