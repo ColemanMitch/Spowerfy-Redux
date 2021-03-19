@@ -34,7 +34,7 @@ class Timer extends React.Component<TimerProps, TimerState> {
 
   async startTimer() {
     // Loop through a list of [0,1,2,3...START_TIME-1]
-    for (const num of Array(START_TIME+1).keys()) {
+    for (const num of Array(this.props.interval+1).keys()) { // new interval will take effect AFTER current interval has run out
       // Set a tick to occur every 1.000 * n seconds
       await setTimeout(this.tick, 1000*(num+1));
     }
@@ -50,7 +50,7 @@ class Timer extends React.Component<TimerProps, TimerState> {
       if(this.state.time.minutes === 0) {
         this.props.skipToNextSong();
         this.setState({
-          time: this.createTimeObj(START_TIME),
+          time: this.createTimeObj(this.props.interval),//(START_TIME),
           songCount: this.state.songCount + 1,
           ticking: false
         });
