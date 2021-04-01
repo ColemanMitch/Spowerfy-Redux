@@ -6,6 +6,10 @@ import { SpotifyService } from './services/spotify.service';
 import Timer from './Timer';
 import Login from './components/Login';
 import SelectMusicPage from './components/SelectMusicPage';
+import {RangeStepInput} from 'react-range-step-input';
+import forceNumber from 'force-number';
+
+
 
 class App extends Component<void, AppState> {
   private spotifyService: SpotifyService;
@@ -23,12 +27,14 @@ class App extends Component<void, AppState> {
       partyStarted: false,
       devices: [],
       songLoaded: false,
+      interval: 10,
     }
     this.spotifyService = new SpotifyService();
     
     this.startPlayback = this.startPlayback.bind(this);
     this.fetchCurrentlyPlaying = this.fetchCurrentlyPlaying.bind(this);
     this.skipToNextSong = this.skipToNextSong.bind(this);
+    this.changeInterval = this.changeInterval.bind(this);
   }
 
   componentDidMount(): void {      
@@ -120,6 +126,11 @@ class App extends Component<void, AppState> {
     });
   }
 
+  changeInterval(e) {
+    const newVal = forceNumber(e.target.value);
+    this.setState({interval: newVal});
+  }
+
   render() {
     return (
       <div className="App">
@@ -129,12 +140,19 @@ class App extends Component<void, AppState> {
             <h1 className="app-title-nonfixed">Spowerfy 🍺</h1>
             </header>
             <h2>Currently Playing: </h2>
-            <Timer skipToNextSong={this.skipToNextSong}></Timer>
+            <Timer skipToNextSong={this.skipToNextSong} interval={this.state.interval}></Timer>
               { this.state.activeSong ?
                 <div>
                   <img src={this.state.activeSong.album.images[0].url} alt='album art of the current track'></img>
                   <h3 style={{fontWeight: 'bold'}}>{this.state.activeSong.name}</h3>
                   <h4 className="artist-name">{this.state.activeSong.album.artists[0].name}</h4> 
+                  <div>
+                    <p>Change the interval between songs?</p> 
+                    <RangeStepInput
+                    min={5} max={120} onChange={this.changeInterval}
+                    value={this.state.interval} step={5}/>
+                    {this.state.interval} seconds 
+                </div>
                 </div>
               :
                 <p>Loading playback..</p>

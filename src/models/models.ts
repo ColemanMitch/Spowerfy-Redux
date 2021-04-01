@@ -6,6 +6,7 @@ export interface TimerState {
 
 export interface TimerProps {
   skipToNextSong: () => void;
+  interval: number;
 }
 
 export interface TimerCount {
@@ -26,6 +27,7 @@ export interface AppState {
   activeSong?: Song;
   devices: Device[];
   songLoaded: false;
+  interval: number;
 }
 
 export interface PlaylistsProps {
