@@ -140,6 +140,22 @@ h1, h2, h3, h4, h5 {
   margin-block-start: 0;
   margin-block-end: 0; }
 
+
+h3, h2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.slider {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
 h2 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem; }
@@ -186,7 +202,12 @@ button:hover, #sign-in-button:hover {
   background: linear-gradient(-45deg, #e4b4a4, #e9bbcd, #77c0b0, #7db6aa);
   background-size: 400% 400%;
   -webkit-animation: gradient 15s ease infinite;
-  animation: gradient 15s ease infinite; }
+  animation: gradient 15s ease infinite;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center !important;
+
+}
 
 .login-app-body {
   flex-direction: row;
@@ -309,3 +330,7 @@ ul {
 
 .playlist-radio {
   margin-top: auto; }
+
+#songCounterSlider {
+  width: 50%;
+}

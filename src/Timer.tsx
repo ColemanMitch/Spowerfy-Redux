@@ -70,7 +70,7 @@ class Timer extends React.Component<TimerProps, TimerState> {
       <div>
         <div className="drink-counter" style={{float:"left"}}>
           <h4>Currently on</h4>
-          <h1>Drink #{this.state.songCount}</h1> 
+          <h1>Drink {this.state.songCount}/{this.props.numberOfSongs}</h1> 
         </div>
         <div className="time-counter" style={{float:"right"}}>
           <h4 >Time Remaining:</h4> 
