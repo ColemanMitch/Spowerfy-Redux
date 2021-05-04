@@ -7,6 +7,7 @@ export interface TimerState {
 export interface TimerProps {
   skipToNextSong: () => void;
   interval: number;
+  numberOfSongs: number;
 }
 
 export interface TimerCount {
@@ -28,6 +29,7 @@ export interface AppState {
   devices: Device[];
   songLoaded: false;
   interval: number;
+  numberOfSongs: number;
 }
 
 export interface PlaylistsProps {
@@ -48,6 +50,8 @@ export interface SelectMusicProps {
   setPlaylist: (playlist: Playlist) => void;
   handleDevice: (device: any) => void;
   startPlayback: () => void;
+  changeNumberOfSongs: (song: any) => void;
+  numberOfSongs: number;
 }
 
 export interface Song {
@@ -81,4 +85,8 @@ export interface Playlist {
   name: string;
   uri: string;
   images: Image[];
+}
+
+export interface Song {
+  count: number;
 }

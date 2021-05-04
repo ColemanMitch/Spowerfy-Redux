@@ -28,6 +28,7 @@ class App extends Component<void, AppState> {
       devices: [],
       songLoaded: false,
       interval: 10,
+      numberOfSongs: 60
     }
     this.spotifyService = new SpotifyService();
     
@@ -35,6 +36,7 @@ class App extends Component<void, AppState> {
     this.fetchCurrentlyPlaying = this.fetchCurrentlyPlaying.bind(this);
     this.skipToNextSong = this.skipToNextSong.bind(this);
     this.changeInterval = this.changeInterval.bind(this);
+    this.changeNumberOfSongs = this.changeNumberOfSongs.bind(this);
   }
 
   componentDidMount(): void {      
@@ -131,6 +133,11 @@ class App extends Component<void, AppState> {
     this.setState({interval: newVal});
   }
 
+  changeNumberOfSongs(e) {
+    const newVal = forceNumber(e.target.value);
+    this.setState({numberOfSongs: newVal});
+  }
+
   render() {
     return (
       <div className="App">
@@ -140,7 +147,7 @@ class App extends Component<void, AppState> {
             <h1 className="app-title-nonfixed">Spowerfy 🍺</h1>
             </header>
             <h2>Currently Playing: </h2>
-            <Timer skipToNextSong={this.skipToNextSong} interval={this.state.interval}></Timer>
+            <Timer skipToNextSong={this.skipToNextSong} interval={this.state.interval} numberOfSongs={this.state.numberOfSongs}></Timer>
               { this.state.activeSong ?
                 <div>
                   <img src={this.state.activeSong.album.images[0].url} alt='album art of the current track'></img>
@@ -169,6 +176,8 @@ class App extends Component<void, AppState> {
                 setPlaylist={this.setPlaylist} 
                 handleDevice={this.handleDevice}
                 startPlayback={this.startPlayback}
+                changeNumberOfSongs={this.changeNumberOfSongs}
+                numberOfSongs={this.state.numberOfSongs}
               />
             : 
               <Login />
