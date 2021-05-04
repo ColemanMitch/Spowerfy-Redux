@@ -1,0 +1,362 @@
+li {
+  vertical-align: middle;
+}
+
+.playlist-div {
+  display: flex;
+  flex-direction: row;
+  border: rgb(133, 133, 133) 1px solid;
+  border-radius: 5px;
+  min-width: 50%;
+  max-height: 4%;
+  padding: 1%;
+  margin: 1%
+}
+
+.playlist-div:hover {
+  background-color: rgb(30,208,94);
+}
+
+.playlist-images {
+  height: 200px;
+  margin-right: 20px;
+  margin-top: 10px;
+}
+
+img {
+  height: 400px;
+  margin-block-end: 0.83rem;
+}
+
+.app-title-nonfixed {
+  text-align: center;
+}
+
+.nonfixed-header {
+  text-align: center;
+}
+
+.party-time {
+  padding-top: 0 !important;
+  display: block;
+  text-align: center;
+}
+
+.playlist-name {
+  align-content: center;
+  vertical-align: middle;
+  justify-content: space-between;
+  font-size: 2rem;
+  display:flex;
+  flex-direction:row;
+  width:100%;
+  list-style-type: none;
+}
+
+input[type=radio] {
+  max-width: 30px;
+  margin-top: 13.5%;
+  border: 0px;
+  width: 25%;
+  height: 2em;
+  flex-direction: row;
+  align-items: right;
+}
+
+.playlists-header {
+  text-align: center;
+}
+
+input[type=text] {
+  font-family: Proxima Nova;
+  margin-top: 1rem;
+  padding: 0.25%;
+  text-align: center;
+  vertical-align: middle;
+  width:35%;
+  height: 5%;
+}
+.playlist-select-div {
+  padding-inline-start: 40px;
+}
+#playlist-select{
+  min-width: 50%;
+}
+
+
+.device {
+  margin-top: 1%;
+  list-style-type: none;
+  border-radius: 5px;
+  min-height: 25px;
+  min-width: 200px;
+  text-align: center;
+  vertical-align: middle;
+}
+body{
+  font-family: Proxima Nova;
+}
+
+#sign-in-button {
+  font-family: Proxima Nova;
+  background-color: rgb(30,208,94);
+  color: white;
+  border: rgb(201, 201, 201) solid 1px;
+  border-radius: 15px;
+  margin-top: 100px;
+  height: 40px !important;
+  width: 250px;
+  align-items: center;
+  align-self: center;
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+
+input {
+  vertical-align: middle;
+}
+
+header {
+  width: 100%;
+  background: black;
+}
+
+.fixed-header {
+  position: fixed;
+  width: 100%;
+  display:flex !important;
+  flex-direction: row;
+  background: black;
+  justify-content: space-between;
+  z-index: 2;
+}
+button {
+  margin-top: 1rem;
+  font-family: Proxima Nova;
+}
+
+.app-title {
+  margin-left: 43%;
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  text-align: center;   
+}
+
+.playlist-container, form {
+  display: block;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  justify-content: center;
+  min-width: 20%;
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+.playlist-container {
+  min-height: 20rem;
+}
+
+
+
+.playlist-search {
+  display: block !important;
+}
+
+.playlist-name-h3 {
+  display: flex;
+  vertical-align: middle !important;
+  flex-direction: row !important;
+  align-items: center;
+}
+
+
+
+input[type=radio] {
+  cursor: pointer;
+  vertical-align: middle;
+  padding-top: 15px;
+}
+
+h1, h2, h3, h4, h5 {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+h2 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+
+h1 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.25rem;
+  background-color: black;
+  color: rgb(214, 214, 214) !important;
+}
+
+.drink-counter {
+  padding-left: 15%;
+ /*background-color: white;*/
+}
+
+.time-counter {
+  padding-right: 15%;
+}
+
+.start-button {
+  background-color: rgb(30,208,94);
+  color: white;
+  border: black solid 1px;
+  border-radius: 10px;
+  max-height: 25px;
+  max-width: 250px;
+}
+
+.css-2b097c-container {
+  width: 50%;
+}
+
+
+button:hover, #sign-in-button:hover {
+  cursor: pointer;
+  background-color: rgb(24, 172, 78);
+
+}
+
+.artist-name {
+  padding-bottom: 10%;
+
+}
+
+
+/* .app-body {
+  background: #bdc3c7;  
+  background: -webkit-linear-gradient(to left, #2c3e50, #bdc3c7);   Chrome 10-25, Safari 5.1-6 
+  background: linear-gradient(to left, #2c3e50, #bdc3c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ 
+
+} */
+
+.app-body {
+  padding-top: 65px;
+	background: linear-gradient(-45deg, #e4b4a4, #e9bbcd, #77c0b0, #7db6aa);
+	background-size: 400% 400%;
+	-webkit-animation: gradient 15s ease infinite;
+	        animation: gradient 15s ease infinite;
+}
+
+.login-app-body {
+  flex-direction: row;
+  align-items: center;
+  padding-bottom: 50%;
+  height: 100%;
+	background: linear-gradient(-45deg, #e4b4a4, #e9bbcd, #77c0b0, #7db6aa);
+	background-size: 400% 400%;
+	-webkit-animation: gradient 15s ease infinite;
+	        animation: gradient 15s ease infinite;
+}
+
+
+@-webkit-keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: local('Proxima Nova'), url(./fonts/Proxima-Nova-Black.otf) format('opentype');
+}
+
+#playback-device-select {
+  margin: auto;
+}
+
+#device-dropdown {
+  margin: 0; /* To remove default bottom margin */ 
+  padding: 0; /* To remove default left padding */
+}
+
+ul {
+  margin-bottom: 0;
+}
+
+#playlist-filter {
+  align-items: center;
+  margin: auto;
+  background-color: rgb(255, 255, 255);
+  border-bottom-color: rgb(204, 204, 204);
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-left-color: rgb(204, 204, 204);
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-right-color: rgb(204, 204, 204);
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-top-color: rgb(204, 204, 204);
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  box-sizing: border-box;
+  cursor: default;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 16px;
+  font-stretch: 100%;
+  font-style: normal;
+  font-variant-caps: normal;
+  font-variant-east-asian: normal;
+  font-variant-ligatures: normal;
+  font-variant-numeric: normal;
+  font-weight: 400;
+  min-height: 38px;
+  min-width: 50%;
+  font-family: Proxima Nova;
+  /*min-height: 38px;*/
+}
+
+footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: black;
+  color: white;
+  min-height: 20px;
+  max-height: 50px;
+  margin: 0;
+  padding-top: 0;
+  align-content: center;
+}
+
+a {
+  color: white;
+}
