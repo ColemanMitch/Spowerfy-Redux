@@ -8,6 +8,7 @@ export interface TimerProps {
   skipToNextSong: () => void;
   interval: number;
   numberOfSongs: number;
+  paused: boolean;
 }
 
 export interface TimerCount {
@@ -30,6 +31,7 @@ export interface AppState {
   songLoaded: false;
   interval: number;
   numberOfSongs: number;
+  paused: boolean;
 }
 
 export interface PlaylistsProps {

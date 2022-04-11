@@ -11,10 +11,9 @@ class Playlists extends Component<PlaylistsProps, PlaylistsState> {
     }
   }
 
-  setActivePlaylist = (e: SyntheticEvent): void => {
+  setActivePlaylist = (playlistURI: string): void => {
     // TODO: Refactor to use e.target.addEventListener instead of needing to cast to HTMLInputElement
-    const target = e.target as HTMLInputElement;
-    this.props.setPlaylist(this.props.playlists.filter(pl => pl.uri === target.value)[0]);
+    this.props.setPlaylist(this.props.playlists.filter(pl => pl.uri === playlistURI)[0]);
   }
 
   filterPlaylist = (e: SyntheticEvent): void => {
@@ -36,19 +35,18 @@ class Playlists extends Component<PlaylistsProps, PlaylistsState> {
             <ul>
               <form id="playlist-select">
               { this.props.playlists.filter((playlists) => this.checkIncludes(playlists.name.toLowerCase(), this.state.playlistFilter.toLowerCase())).map((pl) => (
-                <div className="playlist-div" key={pl.uri}>
+                <div className="playlist-div" style={{backgroundColor: this.props.activePlaylist?.uri === pl.uri ? "#1ed05e": ""}} key={pl.uri} onClick={() => this.setActivePlaylist(pl.uri) }>
                   <img className="playlist-images" src={pl.images[0]?.url} alt="Playlist art"></img>
                   <li className="playlist-item">
                     <h3 className="playlist-name">{pl.name}</h3>
-                    <input 
+                    {/* <input 
                       type="radio"
                       checked={ pl.name === this.props.activePlaylist?.name } 
                       value={pl.uri} 
                       name="playlists"
-                      onChange={() => ({})} /* TODO: get this outta here */
-                      onClick={ this.setActivePlaylist }
+                      onChange={() => ({})} 
                       className="playlist-radio"
-                    />
+                    /> */}
                   </li>
                 </div>
               ))}

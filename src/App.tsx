@@ -8,8 +8,8 @@ import Login from './components/Login';
 import SelectMusicPage from './components/SelectMusicPage';
 import {RangeStepInput} from 'react-range-step-input';
 import forceNumber from 'force-number';
-
-
+import Pause from '@material-ui/icons/Pause';
+import PlayArrow from '@material-ui/icons/PlayArrow';
 
 class App extends Component<void, AppState> {
   private spotifyService: SpotifyService;
@@ -28,7 +28,8 @@ class App extends Component<void, AppState> {
       devices: [],
       songLoaded: false,
       interval: 10,
-      numberOfSongs: 60
+      numberOfSongs: 60,
+      paused: false,
     }
     this.spotifyService = new SpotifyService();
     
@@ -37,6 +38,8 @@ class App extends Component<void, AppState> {
     this.skipToNextSong = this.skipToNextSong.bind(this);
     this.changeInterval = this.changeInterval.bind(this);
     this.changeNumberOfSongs = this.changeNumberOfSongs.bind(this);
+    this.pauseCurrentPlayback = this.pauseCurrentPlayback.bind(this);
+    this.resumeCurrentPlayback = this.resumeCurrentPlayback.bind(this);
   }
 
   componentDidMount(): void {      
@@ -128,6 +131,33 @@ class App extends Component<void, AppState> {
     });
   }
 
+  pauseCurrentPlayback(): void {
+    this.setState({
+      paused: true,
+    })
+    this.spotifyService.pauseCurrentPlayback().then(res => {
+      res.body?.getReader().read().then(body => {
+        if(body?.done) {
+          // Refresh currently playing since we know new song is now playing
+          setTimeout(() => this.fetchCurrentlyPlaying(), 1000);
+        }
+      });
+    });
+  }
+
+  resumeCurrentPlayback(): void {
+    this.setState({
+      paused: false,
+    })
+    this.spotifyService.resumeCurrentPlayback().then(res => {
+      res.body?.getReader().read().then(body => {
+        if(body?.done) {
+          setTimeout(() => this.fetchCurrentlyPlaying(), 1000);
+        }
+      });
+    });
+  }
+
   changeInterval(e) {
     const newVal = forceNumber(e.target.value);
     this.setState({interval: newVal});
@@ -147,14 +177,19 @@ class App extends Component<void, AppState> {
             <h1 className="app-title-nonfixed">Spowerfy 🍺</h1>
             </header>
             <h2>Currently Playing: </h2>
-            <Timer skipToNextSong={this.skipToNextSong} interval={this.state.interval} numberOfSongs={this.state.numberOfSongs}></Timer>
+            <Timer paused={this.state.paused} skipToNextSong={this.skipToNextSong} interval={this.state.interval} numberOfSongs={this.state.numberOfSongs}></Timer>
               { this.state.activeSong ?
                 <div>
                   <img src={this.state.activeSong.album.images[0].url} alt='album art of the current track'></img>
                   <h3 style={{fontWeight: 'bold'}}>{this.state.activeSong.name}</h3>
                   <h4 className="artist-name">{this.state.activeSong.album.artists[0].name}</h4> 
                   <div>
-                    <p>Change the interval between songs?</p> 
+                  { !this.state.paused ?
+                    <Pause style={{cursor: "pointer"}} onClick={this.pauseCurrentPlayback}/>
+                  :
+                    <PlayArrow style={{cursor: "pointer"}} onClick={this.resumeCurrentPlayback}/>
+                  } 
+                  <p>Change the interval between songs?</p> 
                     <RangeStepInput
                     min={5} max={120} onChange={this.changeInterval}
                     value={this.state.interval} step={5}/>
