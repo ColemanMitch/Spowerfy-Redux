@@ -1,6 +1,4 @@
-import { ThreeSixtyOutlined } from '@material-ui/icons';
 import React from 'react';
-import { convertToObject } from 'typescript';
 import { TimerCount, TimerProps, TimerState } from './models/models';
 
 const START_TIME = 10;
@@ -14,37 +12,23 @@ class Timer extends React.Component<TimerProps, TimerState> {
 
   constructor(props: TimerProps) {
     super(props);
-    this.startTimer = this.startTimer.bind(this);
   }
 
   componentDidMount() {
     this.setState({
       ticking: true,
     });
-    this.startTimer();
+    setInterval(this.tick, 1000)
   }
 
   componentDidUpdate() {
     if(!this.state.ticking) { //if not ticking
       if (!this.props.paused) { // and if playing
-        this.startTimer(); // start the timer
         this.setState({
           ticking: true // set ticking to true
         });
       }  
     }
-  }
-
-  async startTimer() {
-    // Loop through a list of [0,1,2,3...START_TIME-1]
-      for (const num of Array(this.props.interval+1).keys()) { // new interval will take effect AFTER current interval has run out
-        // Set a tick to occur every 1.000 * n seconds
-          if (this.props.paused) {
-            break;
-          }
-          await setTimeout(this.tick, 1000*(num+1));
-      
-      }
   }
 
   createTimeObj(seconds: number): TimerCount {
