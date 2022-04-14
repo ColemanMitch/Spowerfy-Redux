@@ -8,8 +8,28 @@ import Login from './components/Login';
 import SelectMusicPage from './components/SelectMusicPage';
 import {RangeStepInput} from 'react-range-step-input';
 import forceNumber from 'force-number';
+import styled from 'styled-components';
 
+export const AppTitleNonFixed = styled.h1`
+  text-align: center;
+`;
 
+export const AppBody = styled.div`
+  padding-top: 65px;
+  background: linear-gradient(-45deg, #e4b4a4, #e9bbcd, #77c0b0, #7db6aa);
+  background-size: 400% 400%;
+  -webkit-animation: gradient 15s ease infinite;
+  animation: gradient 15s ease infinite;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center !important;
+`
+
+const PartyTime = styled(AppBody)`
+  padding-top: 0 !important;
+  display: block;
+  text-align: center;
+`;
 
 class App extends Component<void, AppState> {
   private spotifyService: SpotifyService;
@@ -143,8 +163,8 @@ class App extends Component<void, AppState> {
       <div className="App">
         { this.state.partyStarted ?
           <div className="party-time app-body">
-            <header className="nonfixed-header">
-            <h1 className="app-title-nonfixed">Spowerfy 🍺</h1>
+            <header>
+              <AppTitleNonFixed>Spowerfy 🍺</AppTitleNonFixed>
             </header>
             <h2>Currently Playing: </h2>
             <Timer skipToNextSong={this.skipToNextSong} interval={this.state.interval} numberOfSongs={this.state.numberOfSongs}></Timer>
