@@ -6,13 +6,13 @@ const START_TIME = 10;
 
 const DrinkCounter = styled.div`
   padding-left: 15%;
-  float:"left";
+  float: left;
 `;
 
 const TimeCounter = styled.div`
   padding-right: 15%;
   float: right;
-`
+`;
 
 class Timer extends React.Component<TimerProps, TimerState> {
 
