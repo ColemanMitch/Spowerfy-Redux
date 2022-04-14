@@ -45,6 +45,11 @@ const StartButton = styled.button`
   float: right;
 `;
 
+const DeviceDropdown = styled.ul`
+  margin: 0;
+  padding: 0;
+`;
+
 const SelectMusicPage = (props: SelectMusicProps) => {
   return <div>
     <FixedHeader>
@@ -56,25 +61,25 @@ const SelectMusicPage = (props: SelectMusicProps) => {
       <h3>Let's get this party started by configuring the number of songs, playback device, and playlist below!</h3>
       <hr></hr>
       <br></br>
-        { props.devices ?
+      { props.devices ?
         <div>
           <h3>For how many songs would you like this session?</h3> 
           <Slider>
-            <RangeStepInput id="songCounterSlider"
+            <RangeStepInput style={{width: '50%'}}
             min={10} max={120} value={props.numberOfSongs} step={5} onChange={props.changeNumberOfSongs}/>
             <span id="slideroutput">{props.numberOfSongs}</span>             
           </Slider>         
-          <ul id="device-dropdown">
+          <DeviceDropdown>
             <h3>Select your playback device</h3>
             <PlaybackDeviceSelect
               options={props.devices.map(device => ({ label: device.name, value: device.id }))}
               onChange={props.handleDevice} 
             />
-          </ul>
-          </div>
+          </DeviceDropdown>
+        </div>
         :
         <p>Loading devices...</p>
-        }
+      }
       <Playlists playlists={props.playlists} activePlaylist={props.activePlaylist} setPlaylist={props.setPlaylist}/>
     </div>
   </div>

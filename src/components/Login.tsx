@@ -15,7 +15,6 @@ const SignInButton = styled.button`
   align-items: center;
   align-self: center;
 
-  margin: 0;
   position: absolute;
   left: 50%;
   -ms-transform: translate(-50%, -50%);

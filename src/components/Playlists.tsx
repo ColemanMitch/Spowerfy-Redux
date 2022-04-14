@@ -45,7 +45,7 @@ const PlaylistImage = styled.img`
   height: 200px;
   margin-right: 20px;
   margin-top: 10px;
-`
+`;
 
 const PlaylistSelectForm = styled.form`
   min-width: 50%;
@@ -55,7 +55,45 @@ const PlaylistSelectForm = styled.form`
   justify-content: center;
   margin-right: 5%;
   margin-left: 5%;
-`
+`;
+
+const PlaylistFilter = styled.input`
+  align-items: center;
+  margin: auto;
+  margin-top: 1rem;
+  background-color: white;
+  border-bottom-color: #cccccc;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-left-color: #cccccc;
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-right-color: #cccccc;
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-top-color: #cccccc;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  box-sizing: border-box;
+  cursor: default;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 16px;
+  font-stretch: 100%;
+  font-style: normal;
+  font-variant-caps: normal;
+  font-variant-east-asian: normal;
+  font-variant-ligatures: normal;
+  font-variant-numeric: normal;
+  font-weight: 400;
+  min-height: 50px;
+  min-width: 50%;
+  font-family: Proxima Nova;
+`;
 
 class Playlists extends Component<PlaylistsProps, PlaylistsState> {
 
@@ -84,7 +122,7 @@ class Playlists extends Component<PlaylistsProps, PlaylistsState> {
 
   render () {
     return <div>
-      <input id="playlist-filter" placeholder="Start typing to filter for your playlist" onChange={ this.filterPlaylist } value={ this.state.playlistFilter }/>
+      <PlaylistFilter placeholder="Start typing to filter for your playlist" onChange={ this.filterPlaylist } value={ this.state.playlistFilter }/>
       { this.props.playlists.length > 0 ?
         <PlaylistContainer>
           <ul>
