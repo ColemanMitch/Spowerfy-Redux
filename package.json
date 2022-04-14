@@ -12,7 +12,6 @@
     "@types/react-dom": "^17.0.2",
     "@types/react-select": "^4.0.13",
     "force-number": "^1.1.0",
-    "node-sass": "^5.0.0",
     "querystring": "^0.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -26,10 +25,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "npm run sass && react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "sass": "node-sass src/styles/main.scss src/styles/main.css"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
