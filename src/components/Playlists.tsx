@@ -38,15 +38,7 @@ class Playlists extends Component<PlaylistsProps, PlaylistsState> {
                 <div className="playlist-div" style={{backgroundColor: this.props.activePlaylist?.uri === pl.uri ? "#1ed05e": ""}} key={pl.uri} onClick={() => this.setActivePlaylist(pl.uri) }>
                   <img className="playlist-images" src={pl.images[0]?.url} alt="Playlist art"></img>
                   <li className="playlist-item">
-                    <h3 className="playlist-name">{pl.name}</h3>
-                    {/* <input 
-                      type="radio"
-                      checked={ pl.name === this.props.activePlaylist?.name } 
-                      value={pl.uri} 
-                      name="playlists"
-                      onChange={() => ({})} 
-                      className="playlist-radio"
-                    /> */}
+                    <h6 className="playlist-name">{pl.name}</h6>
                   </li>
                 </div>
               ))}
