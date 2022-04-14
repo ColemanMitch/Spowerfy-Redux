@@ -8,8 +8,28 @@ import Login from './components/Login';
 import SelectMusicPage from './components/SelectMusicPage';
 import {RangeStepInput} from 'react-range-step-input';
 import forceNumber from 'force-number';
+import styled from 'styled-components';
 
+export const AppTitleNonFixed = styled.h1`
+  text-align: center;
+`;
 
+export const AppBody = styled.div`
+  padding-top: 65px;
+  background: linear-gradient(-45deg, #e4b4a4, #e9bbcd, #77c0b0, #7db6aa);
+  background-size: 400% 400%;
+  -webkit-animation: gradient 15s ease infinite;
+  animation: gradient 15s ease infinite;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center !important;
+`
+
+const PartyTime = styled(AppBody)`
+  padding-top: 0 !important;
+  display: block;
+  text-align: center;
+`;
 
 class App extends Component<void, AppState> {
   private spotifyService: SpotifyService;
@@ -142,29 +162,29 @@ class App extends Component<void, AppState> {
     return (
       <div className="App">
         { this.state.partyStarted ?
-          <div className="party-time app-body">
-            <header className="nonfixed-header">
-            <h1 className="app-title-nonfixed">Spowerfy 🍺</h1>
+          <PartyTime className="app-body">
+            <header>
+              <AppTitleNonFixed>Spowerfy 🍺</AppTitleNonFixed>
             </header>
             <h2>Currently Playing: </h2>
             <Timer skipToNextSong={this.skipToNextSong} interval={this.state.interval} numberOfSongs={this.state.numberOfSongs}></Timer>
               { this.state.activeSong ?
-                <div>
-                  <img src={this.state.activeSong.album.images[0].url} alt='album art of the current track'></img>
-                  <h3 style={{fontWeight: 'bold'}}>{this.state.activeSong.name}</h3>
-                  <h4 className="artist-name">{this.state.activeSong.album.artists[0].name}</h4> 
                   <div>
-                    <p>Change the interval between songs?</p> 
-                    <RangeStepInput
-                    min={5} max={120} onChange={this.changeInterval}
-                    value={this.state.interval} step={5}/>
-                    {this.state.interval} seconds 
-                </div>
+                    <img src={this.state.activeSong.album.images[0].url} alt='album art of the current track'></img>
+                    <h3 style={{fontWeight: 'bold'}}>{this.state.activeSong.name}</h3>
+                    <h4 style={{paddingBottom: '5%'}}>{this.state.activeSong.album.artists[0].name}</h4> 
+                    <div>
+                      <p>Change the interval between songs?</p> 
+                      <RangeStepInput
+                      min={5} max={120} onChange={this.changeInterval}
+                      value={this.state.interval} step={5}/>
+                      {this.state.interval} seconds 
+                  </div>
                 </div>
               :
                 <p>Loading playback..</p>
               }
-          </div>
+          </PartyTime>
         :
           <div>
             { this.state.user ?

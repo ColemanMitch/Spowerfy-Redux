@@ -1,7 +1,14 @@
 import { Component, SyntheticEvent } from "react";
 import { PlaylistsProps, PlaylistsState } from "../models/models";
-
-
+import { 
+  PlaylistContainer, 
+  PlaylistItem, 
+  PlaylistName, 
+  PlaylistRadio, 
+  PlaylistDiv, 
+  PlaylistImage, 
+  PlaylistSelectForm, 
+  PlaylistFilter } from "../styles/Playlists.style"
 class Playlists extends Component<PlaylistsProps, PlaylistsState> {
 
   constructor(props: PlaylistsProps) {
@@ -29,33 +36,30 @@ class Playlists extends Component<PlaylistsProps, PlaylistsState> {
 
   render () {
     return <div>
-      <input id="playlist-filter" placeholder="Start typing to filter for your playlist" onChange={ this.filterPlaylist } value={ this.state.playlistFilter }/>
+      <PlaylistFilter placeholder="Start typing to filter for your playlist" onChange={ this.filterPlaylist } value={ this.state.playlistFilter }/>
       { this.props.playlists.length > 0 ?
-        <div>
-          <div className="playlist-container">
-            <ul>
-              <form id="playlist-select">
-              { this.props.playlists.filter((playlists) => this.checkIncludes(playlists.name.toLowerCase(), this.state.playlistFilter.toLowerCase())).map((pl) => (
-                <div className="playlist-div" key={pl.uri}>
-                  <img className="playlist-images" src={pl.images[0]?.url} alt="Playlist art"></img>
-                  <li className="playlist-item">
-                    <h3 className="playlist-name">{pl.name}</h3>
-                    <input 
-                      type="radio"
-                      checked={ pl.name === this.props.activePlaylist?.name } 
-                      value={pl.uri} 
-                      name="playlists"
-                      onChange={() => ({})} /* TODO: get this outta here */
-                      onClick={ this.setActivePlaylist }
-                      className="playlist-radio"
-                    />
-                  </li>
-                </div>
-              ))}
-              </form>
-            </ul>
-          </div>
-        </div>
+        <PlaylistContainer>
+          <ul>
+            <PlaylistSelectForm>
+            { this.props.playlists.filter((playlists) => this.checkIncludes(playlists.name.toLowerCase(), this.state.playlistFilter.toLowerCase())).map((pl) => (
+              <PlaylistDiv key={pl.uri}>
+                <PlaylistImage src={pl.images[0]?.url} alt="Playlist art"></PlaylistImage>
+                <PlaylistItem>
+                  <PlaylistName>{pl.name}</PlaylistName>
+                  <PlaylistRadio 
+                    type="radio"
+                    checked={ pl.name === this.props.activePlaylist?.name } 
+                    value={pl.uri} 
+                    name="playlists"
+                    onChange={() => ({})} /* TODO: get this outta here */
+                    onClick={ this.setActivePlaylist }
+                  />
+                </PlaylistItem>
+              </PlaylistDiv>
+            ))}
+            </PlaylistSelectForm>
+          </ul>
+        </PlaylistContainer>
       : 
         <p>Loading playlists...</p>
       }
