@@ -1,7 +1,18 @@
 import React from 'react';
+import styled from 'styled-components';
 import { TimerCount, TimerProps, TimerState } from './models/models';
 
 const START_TIME = 10;
+
+const DrinkCounter = styled.div`
+  padding-left: 15%;
+  float:"left";
+`;
+
+const TimeCounter = styled.div`
+  padding-right: 15%;
+  float: right;
+`
 
 class Timer extends React.Component<TimerProps, TimerState> {
 
@@ -68,14 +79,14 @@ class Timer extends React.Component<TimerProps, TimerState> {
   render() {
     return(
       <div>
-        <div className="drink-counter" style={{float:"left"}}>
+        <DrinkCounter>
           <h4>Currently on</h4>
           <h1>Drink {this.state.songCount}/{this.props.numberOfSongs}</h1> 
-        </div>
-        <div className="time-counter" style={{float:"right"}}>
+        </DrinkCounter>
+        <TimeCounter>
           <h4 >Time Remaining:</h4> 
           <h1 >{this.state.time.minutes}m {this.state.time.seconds}s</h1>
-        </div>
+        </TimeCounter>
       </div>
     );
   }

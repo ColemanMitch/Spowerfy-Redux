@@ -22,8 +22,19 @@ const SignInButton = styled.button`
   transform: translate(-50%, -50%);
 `;
 
+const LoginAppBody = styled.div`
+  flex-direction: row;
+  align-items: center;
+  padding-bottom: 50%;
+  height: 100%;
+  background: linear-gradient(-45deg, #e4b4a4, #e9bbcd, #77c0b0, #7db6aa);
+  background-size: 400% 400%;
+  -webkit-animation: gradient 15s ease infinite;
+  animation: gradient 15s ease infinite;
+`;
+
 const Login = () => {
-  return <div className="login-app-body">
+  return <LoginAppBody>
     <header>
       <AppTitleNonFixed>Spowerfy 🍺</AppTitleNonFixed>
     </header>
@@ -35,7 +46,7 @@ const Login = () => {
     }>
       Sign in with Spotify
     </SignInButton>
-  </div>;
+  </LoginAppBody>;
 }
 
 export default Login;

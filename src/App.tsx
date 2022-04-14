@@ -162,7 +162,7 @@ class App extends Component<void, AppState> {
     return (
       <div className="App">
         { this.state.partyStarted ?
-          <div className="party-time app-body">
+          <PartyTime className="app-body">
             <header>
               <AppTitleNonFixed>Spowerfy 🍺</AppTitleNonFixed>
             </header>
@@ -172,7 +172,7 @@ class App extends Component<void, AppState> {
                 <div>
                   <img src={this.state.activeSong.album.images[0].url} alt='album art of the current track'></img>
                   <h3 style={{fontWeight: 'bold'}}>{this.state.activeSong.name}</h3>
-                  <h4 className="artist-name">{this.state.activeSong.album.artists[0].name}</h4> 
+                  <h4 style={{paddingBottom: '5%'}}>{this.state.activeSong.album.artists[0].name}</h4> 
                   <div>
                     <p>Change the interval between songs?</p> 
                     <RangeStepInput
@@ -184,7 +184,7 @@ class App extends Component<void, AppState> {
               :
                 <p>Loading playback..</p>
               }
-          </div>
+          </PartyTime>
         :
           <div>
             { this.state.user ?

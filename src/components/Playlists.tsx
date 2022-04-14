@@ -10,7 +10,7 @@ const PlaylistItem = styled.li`
   align-content: center;
   vertical-align: middle;
   justify-content: space-between;
-  font-size: $size-l;
+  font-size: 32px;
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -47,6 +47,16 @@ const PlaylistImage = styled.img`
   margin-top: 10px;
 `
 
+const PlaylistSelectForm = styled.form`
+  min-width: 50%;
+  display: block;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  justify-content: center;
+  margin-right: 5%;
+  margin-left: 5%;
+`
+
 class Playlists extends Component<PlaylistsProps, PlaylistsState> {
 
   constructor(props: PlaylistsProps) {
@@ -78,7 +88,7 @@ class Playlists extends Component<PlaylistsProps, PlaylistsState> {
       { this.props.playlists.length > 0 ?
         <PlaylistContainer>
           <ul>
-            <form id="playlist-select">
+            <PlaylistSelectForm>
             { this.props.playlists.filter((playlists) => this.checkIncludes(playlists.name.toLowerCase(), this.state.playlistFilter.toLowerCase())).map((pl) => (
               <PlaylistDiv key={pl.uri}>
                 <PlaylistImage src={pl.images[0]?.url} alt="Playlist art"></PlaylistImage>
@@ -95,7 +105,7 @@ class Playlists extends Component<PlaylistsProps, PlaylistsState> {
                 </PlaylistItem>
               </PlaylistDiv>
             ))}
-            </form>
+            </PlaylistSelectForm>
           </ul>
         </PlaylistContainer>
       : 

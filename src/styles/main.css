@@ -1,19 +1,14 @@
-a {
-  color: white; 
-}
-
-.party-time {
-  padding-top: 0 !important;
-  display: block;
-  text-align: center;
-}
-
+/* Gradient doesnt work with styled-components */
 .app-body {
   padding-top: 65px;
 	background: linear-gradient(-45deg, #e4b4a4, #e9bbcd, #77c0b0, #7db6aa);
 	background-size: 400% 400%;
 	-webkit-animation: gradient 15s ease infinite;
 	        animation: gradient 15s ease infinite;
+}
+
+a {
+  color: white; 
 }
 
 li {
@@ -45,59 +40,34 @@ input[type=text] {
   height: 5%; 
 }
 
-#playlist-select {
-  min-width: 50%; 
-}
-
 body {
   font-family: Proxima Nova; 
 }
 
 input {
-  vertical-align: middle; }
+  vertical-align: middle; 
+}
 
 header {
   width: 100%;
-  background: black; }
-
-.fixed-header {
-  position: fixed;
-  width: 100%;
-  display: flex !important;
-  flex-direction: row;
-  background: black;
-  justify-content: space-between;
-  z-index: 2; }
+  background: black; 
+}
 
 button {
   margin-top: 1rem;
-  font-family: Proxima Nova; }
-
-.app-title {
-  margin-left: 43%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center; }
-
-.playlist-container, form {
-  display: block;
-  flex-direction: row !important;
-  flex-wrap: wrap !important;
-  justify-content: center;
-  min-width: 20%;
-  margin-right: 5%;
-  margin-left: 5%; }
+  font-family: Proxima Nova; 
+}
 
 input[type=radio] {
   cursor: pointer;
   vertical-align: middle;
-  padding-top: 15px; }
+  padding-top: 15px; 
+}
 
 h1, h2, h3, h4, h5 {
   margin-block-start: 0;
-  margin-block-end: 0; }
-
+  margin-block-end: 0; 
+}
 
 h3, h2 {
   display: flex;
@@ -106,58 +76,22 @@ h3, h2 {
   align-items: center;
 }
 
-.slider {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1rem;
-}
-
 h2 {
   padding-top: 0.25rem;
-  padding-bottom: 0.25rem; }
+  padding-bottom: 0.25rem; 
+}
 
 h1 {
   padding-top: 0.5rem;
   padding-bottom: 0.25rem;
   background-color: black;
-  color: #d6d6d6 !important; }
+  color: #d6d6d6 !important; 
+}
 
-.drink-counter {
-  padding-left: 15%;
-  /*background-color: white;*/ }
-
-.time-counter {
-  padding-right: 15%; }
-
-.start-button {
-  background-color: #1ed05e;
-  color: white;
-  border: black solid 1px;
-  border-radius: 10px;
-  max-height: 25px;
-  max-width: 250px; }
-
-.css-2b097c-container {
-  width: 50%; }
-
-button:hover, #sign-in-button:hover {
+button:hover {
   cursor: pointer;
-  background-color: #18ac4e; }
-
-.artist-name {
-  padding-bottom: 5%; }
-
-.login-app-body {
-  flex-direction: row;
-  align-items: center;
-  padding-bottom: 50%;
-  height: 100%;
-  background: linear-gradient(-45deg, #e4b4a4, #e9bbcd, #77c0b0, #7db6aa);
-  background-size: 400% 400%;
-  -webkit-animation: gradient 15s ease infinite;
-  animation: gradient 15s ease infinite; }
+  background-color: #18ac4e; 
+}
 
 @-webkit-keyframes gradient {
   0% {
