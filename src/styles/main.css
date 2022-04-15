@@ -1,3 +1,8 @@
+/* TODO: Ensure body fills entire page */
+html {
+  height: 100%;
+}
+
 /* Gradient doesnt work with styled-components */
 .app-body {
   padding-top: 65px;
@@ -41,6 +46,7 @@ input[type=text] {
 }
 
 body {
+  min-height: 100%;
   font-family: Proxima Nova; 
 }
 

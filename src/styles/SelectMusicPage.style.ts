@@ -17,7 +17,7 @@ export const FixedHeader = styled.header`
 `;
 
 export const AppTitle = styled.h1`
-  margin-left: 43%;
+  margin: auto;
   display: flex;
   align-items: center;
   justify-content: center;

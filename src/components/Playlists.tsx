@@ -1,14 +1,16 @@
 import { Component, SyntheticEvent } from "react";
 import { PlaylistsProps, PlaylistsState } from "../models/models";
 import { 
-  PlaylistContainer, 
-  PlaylistItem, 
-  PlaylistName, 
-  PlaylistRadio, 
-  PlaylistDiv, 
-  PlaylistImage, 
-  PlaylistSelectForm, 
-  PlaylistFilter } from "../styles/Playlists.style"
+  PlaylistContainer,
+  PlaylistItem,
+  PlaylistName,
+  PlaylistDiv,
+  PlaylistImage,
+  PlaylistSelectForm,
+  PlaylistFilter,
+  PlayButton} from "../styles/Playlists.style";
+import playIcon from "../images/playIcon.png";
+
 class Playlists extends Component<PlaylistsProps, PlaylistsState> {
 
   constructor(props: PlaylistsProps) {
@@ -18,16 +20,15 @@ class Playlists extends Component<PlaylistsProps, PlaylistsState> {
     }
   }
 
-  setActivePlaylist = (e: SyntheticEvent): void => {
-    // TODO: Refactor to use e.target.addEventListener instead of needing to cast to HTMLInputElement
-    const target = e.target as HTMLInputElement;
-    this.props.setPlaylist(this.props.playlists.filter(pl => pl.uri === target.value)[0]);
+  startPlayback = (playlistName: string): void => {
+    this.props.startPlayback(this.props.playlists.filter(pl => pl.uri === playlistName)[0]);
   }
 
   filterPlaylist = (e: SyntheticEvent): void => {
     // TODO: Refactor to use e.target.addEventListener instead of needing to cast to HTMLInputElement
     const target = e.target as HTMLInputElement;
     this.setState({playlistFilter: target.value})
+    e.stopPropagation()
   }
 
   private checkIncludes(s1: string, s2: string) {
@@ -46,14 +47,9 @@ class Playlists extends Component<PlaylistsProps, PlaylistsState> {
                 <PlaylistImage src={pl.images[0]?.url} alt="Playlist art"></PlaylistImage>
                 <PlaylistItem>
                   <PlaylistName>{pl.name}</PlaylistName>
-                  <PlaylistRadio 
-                    type="radio"
-                    checked={ pl.name === this.props.activePlaylist?.name } 
-                    value={pl.uri} 
-                    name="playlists"
-                    onChange={() => ({})} /* TODO: get this outta here */
-                    onClick={ this.setActivePlaylist }
-                  />
+                  <PlayButton onClick={() => this.startPlayback(pl.uri)} type="button">
+                    <img style={{width: "50px", height: "50px", margin: 0}} src={playIcon}></img>
+                  </PlayButton>
                 </PlaylistItem>
               </PlaylistDiv>
             ))}
