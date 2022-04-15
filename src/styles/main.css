@@ -1,41 +1,29 @@
+/* TODO: Ensure body fills entire page */
+html {
+  height: 100%;
+}
+
+/* Gradient doesnt work with styled-components */
+.app-body {
+  padding-top: 65px;
+	background: linear-gradient(-45deg, #e4b4a4, #e9bbcd, #77c0b0, #7db6aa);
+	background-size: 400% 400%;
+	-webkit-animation: gradient 15s ease infinite;
+	        animation: gradient 15s ease infinite;
+}
+
 a {
-  color: white; }
+  color: white; 
+}
 
 li {
-  vertical-align: middle; }
-
-.playlist-div {
-  display: flex;
-  flex-direction: row;
-  border: #858585 1px solid;
-  border-radius: 5px;
-  min-width: 50%;
-  max-height: 4%;
-  padding: 1%;
-  margin: 1%; }
-
-.playlist-div:hover {
-  background-color: #1ed05e; }
-
-.playlist-images {
-  height: 200px;
-  margin-right: 20px;
-  margin-top: 10px; }
+  vertical-align: middle; 
+}
 
 img {
   height: 400px;
-  margin-block-end: 0.83rem; }
-
-.app-title-nonfixed {
-  text-align: center; }
-
-.nonfixed-header {
-  text-align: center; }
-
-.party-time {
-  padding-top: 0 !important;
-  display: block;
-  text-align: center; }
+  margin-block-end: 0.83rem; 
+}
 
 input[type=radio] {
   max-width: 30px;
@@ -44,10 +32,8 @@ input[type=radio] {
   width: 25%;
   height: 2em;
   flex-direction: row;
-  align-items: right; }
-
-.playlists-header {
-  text-align: center; }
+  align-items: right; 
+}
 
 input[type=text] {
   font-family: Proxima Nova;
@@ -56,90 +42,38 @@ input[type=text] {
   text-align: center;
   vertical-align: middle;
   width: 35%;
-  height: 5%; }
-
-.playlist-select-div {
-  padding-inline-start: 40px; }
-
-#playlist-select {
-  min-width: 50%; }
-
-.device {
-  margin-top: 1%;
-  list-style-type: none;
-  border-radius: 5px;
-  min-height: 25px;
-  min-width: 200px;
-  text-align: center;
-  vertical-align: middle; }
+  height: 5%; 
+}
 
 body {
-  font-family: Proxima Nova; }
-
-#sign-in-button {
-  font-family: Proxima Nova;
-  background-color: #1ed05e;
-  color: white;
-  border: #c9c9c9 solid 1px;
-  border-radius: 15px;
-  margin-top: 100px;
-  height: 40px !important;
-  width: 250px;
-  align-items: center;
-  align-self: center; }
-
-.center {
-  margin: 0;
-  position: absolute;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%); }
+  min-height: 100%;
+  font-family: Proxima Nova; 
+}
 
 input {
-  vertical-align: middle; }
+  vertical-align: middle; 
+}
 
 header {
   width: 100%;
-  background: black; }
-
-.fixed-header {
-  position: fixed;
-  width: 100%;
-  display: flex !important;
-  flex-direction: row;
-  background: black;
-  justify-content: space-between;
-  z-index: 2; }
+  background: black; 
+}
 
 button {
   margin-top: 1rem;
-  font-family: Proxima Nova; }
-
-.app-title {
-  margin-left: 43%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center; }
-
-.playlist-container, form {
-  display: block;
-  flex-direction: row !important;
-  flex-wrap: wrap !important;
-  justify-content: center;
-  min-width: 20%;
-  margin-right: 5%;
-  margin-left: 5%; }
+  font-family: Proxima Nova; 
+}
 
 input[type=radio] {
   cursor: pointer;
   vertical-align: middle;
-  padding-top: 15px; }
+  padding-top: 15px; 
+}
 
 h1, h2, h3, h4, h5 {
   margin-block-start: 0;
-  margin-block-end: 0; }
-
+  margin-block-end: 0; 
+}
 
 h3, h2 {
   display: flex;
@@ -148,140 +82,51 @@ h3, h2 {
   align-items: center;
 }
 
-.slider {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1rem;
-}
-
 h2 {
   padding-top: 0.25rem;
-  padding-bottom: 0.25rem; }
+  padding-bottom: 0.25rem; 
+}
 
 h1 {
   padding-top: 0.5rem;
   padding-bottom: 0.25rem;
   background-color: black;
-  color: #d6d6d6 !important; }
-
-.drink-counter {
-  padding-left: 15%;
-  /*background-color: white;*/ }
-
-.time-counter {
-  padding-right: 15%; }
-
-.start-button {
-  background-color: #1ed05e;
-  color: white;
-  border: black solid 1px;
-  border-radius: 10px;
-  max-height: 25px;
-  max-width: 250px; }
-
-.css-2b097c-container {
-  width: 50%; }
-
-button:hover, #sign-in-button:hover {
-  cursor: pointer;
-  background-color: #18ac4e; }
-
-.artist-name {
-  padding-bottom: 5%; }
-
-/* .app-body {
-  background: #bdc3c7;  
-  background: -webkit-linear-gradient(to left, #2c3e50, #bdc3c7);   Chrome 10-25, Safari 5.1-6 
-  background: linear-gradient(to left, #2c3e50, #bdc3c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ 
-
-} */
-.app-body {
-  padding-top: 65px;
-  background: linear-gradient(-45deg, #e4b4a4, #e9bbcd, #77c0b0, #7db6aa);
-  background-size: 400% 400%;
-  -webkit-animation: gradient 15s ease infinite;
-  animation: gradient 15s ease infinite;
-  display: flex !important;
-  flex-direction: column;
-  justify-content: center !important;
-
+  color: #d6d6d6 !important; 
 }
 
-.login-app-body {
-  flex-direction: row;
-  align-items: center;
-  padding-bottom: 50%;
-  height: 100%;
-  background: linear-gradient(-45deg, #e4b4a4, #e9bbcd, #77c0b0, #7db6aa);
-  background-size: 400% 400%;
-  -webkit-animation: gradient 15s ease infinite;
-  animation: gradient 15s ease infinite; }
+button:hover {
+  cursor: pointer;
+  background-color: #18ac4e; 
+}
 
 @-webkit-keyframes gradient {
   0% {
-    background-position: 0% 50%; }
+    background-position: 0% 50%; 
+  }
   50% {
-    background-position: 100% 50%; }
+    background-position: 100% 50%; 
+  }
   100% {
-    background-position: 0% 50%; } }
+    background-position: 0% 50%; 
+  } 
+}
 
 @keyframes gradient {
   0% {
-    background-position: 0% 50%; }
+    background-position: 0% 50%; 
+  }
   50% {
-    background-position: 100% 50%; }
+    background-position: 100% 50%; 
+  }
   100% {
-    background-position: 0% 50%; } }
+    background-position: 0% 50%; 
+  } 
+}
 
 @font-face {
   font-family: 'Proxima Nova';
-  src: local("Proxima Nova"), url(./fonts/Proxima-Nova-Black.otf) format("opentype"); }
-
-#device-dropdown {
-  margin: 0;
-  /* To remove default bottom margin */
-  padding: 0;
-  /* To remove default left padding */ }
-
-#playlist-filter {
-  align-items: center;
-  margin: auto;
-  margin-top: 1rem;
-  background-color: white;
-  border-bottom-color: #cccccc;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  border-left-color: #cccccc;
-  border-left-style: solid;
-  border-left-width: 1px;
-  border-right-color: #cccccc;
-  border-right-style: solid;
-  border-right-width: 1px;
-  border-top-color: #cccccc;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  box-sizing: border-box;
-  cursor: default;
-  display: flex;
-  flex-wrap: wrap;
-  font-size: 16px;
-  font-stretch: 100%;
-  font-style: normal;
-  font-variant-caps: normal;
-  font-variant-east-asian: normal;
-  font-variant-ligatures: normal;
-  font-variant-numeric: normal;
-  font-weight: 400;
-  min-height: 50px;
-  min-width: 50%;
-  font-family: Proxima Nova;
-  /*min-height: 38px;*/ }
+  src: local("Proxima Nova"), url(./fonts/Proxima-Nova-Black.otf) format("opentype");
+}
 
 footer {
   width: 100%;
@@ -293,44 +138,10 @@ footer {
   max-height: 50px;
   margin: 0;
   padding-top: 0;
-  align-content: center; }
-
-a {
-  color: white; }
-
-.playlist-div:last-child {
-  margin-bottom: 0; }
+  align-content: center; 
+}
 
 ul {
   margin-bottom: 0;
-  padding-bottom: 1rem; }
-
-.playback-device-select {
-  margin: auto; }
-
-.playlist-container {
-  min-height: 20rem; }
-
-.playlist-search {
-  display: block !important; }
-
-.playlist-item {
-  align-content: center;
-  vertical-align: middle;
-  justify-content: space-between;
-  font-size: 32px;
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  list-style-type: none; }
-
-.playlist-name {
-  margin-top: auto;
-  margin-bottom: auto; }
-
-.playlist-radio {
-  margin-top: auto; }
-
-#songCounterSlider {
-  width: 50%;
+  padding-bottom: 1rem; 
 }

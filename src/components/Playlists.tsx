@@ -1,6 +1,15 @@
 import { Component, SyntheticEvent } from "react";
 import { PlaylistsProps, PlaylistsState } from "../models/models";
-
+import { 
+  PlaylistContainer,
+  PlaylistItem,
+  PlaylistName,
+  PlaylistDiv,
+  PlaylistImage,
+  PlaylistSelectForm,
+  PlaylistFilter,
+  PlayButton} from "../styles/Playlists.style";
+import playIcon from "../images/playIcon.png";
 
 class Playlists extends Component<PlaylistsProps, PlaylistsState> {
 
@@ -11,15 +20,15 @@ class Playlists extends Component<PlaylistsProps, PlaylistsState> {
     }
   }
 
-  setActivePlaylist = (playlistURI: string): void => {
-    // TODO: Refactor to use e.target.addEventListener instead of needing to cast to HTMLInputElement
-    this.props.setPlaylist(this.props.playlists.filter(pl => pl.uri === playlistURI)[0]);
+  startPlayback = (playlistName: string): void => {
+    this.props.startPlayback(this.props.playlists.filter(pl => pl.uri === playlistName)[0]);
   }
 
   filterPlaylist = (e: SyntheticEvent): void => {
     // TODO: Refactor to use e.target.addEventListener instead of needing to cast to HTMLInputElement
     const target = e.target as HTMLInputElement;
     this.setState({playlistFilter: target.value})
+    e.stopPropagation()
   }
 
   private checkIncludes(s1: string, s2: string) {
@@ -28,24 +37,25 @@ class Playlists extends Component<PlaylistsProps, PlaylistsState> {
 
   render () {
     return <div>
-      <input id="playlist-filter" placeholder="Start typing to filter for your playlist" onChange={ this.filterPlaylist } value={ this.state.playlistFilter }/>
+      <PlaylistFilter placeholder="Start typing to filter for your playlist" onChange={ this.filterPlaylist } value={ this.state.playlistFilter }/>
       { this.props.playlists.length > 0 ?
-        <div>
-          <div className="playlist-container">
-            <ul>
-              <form id="playlist-select">
-              { this.props.playlists.filter((playlists) => this.checkIncludes(playlists.name.toLowerCase(), this.state.playlistFilter.toLowerCase())).map((pl) => (
-                <div className="playlist-div" style={{backgroundColor: this.props.activePlaylist?.uri === pl.uri ? "#1ed05e": ""}} key={pl.uri} onClick={() => this.setActivePlaylist(pl.uri) }>
-                  <img className="playlist-images" src={pl.images[0]?.url} alt="Playlist art"></img>
-                  <li className="playlist-item">
-                    <h6 className="playlist-name">{pl.name}</h6>
-                  </li>
-                </div>
-              ))}
-              </form>
-            </ul>
-          </div>
-        </div>
+        <PlaylistContainer>
+          <ul>
+            <PlaylistSelectForm>
+            { this.props.playlists.filter((playlists) => this.checkIncludes(playlists.name.toLowerCase(), this.state.playlistFilter.toLowerCase())).map((pl) => (
+              <PlaylistDiv key={pl.uri}>
+                <PlaylistImage src={pl.images[0]?.url} alt="Playlist art"></PlaylistImage>
+                <PlaylistItem>
+                  <PlaylistName>{pl.name}</PlaylistName>
+                  <PlayButton onClick={() => this.startPlayback(pl.uri)} type="button">
+                    <img style={{width: "50px", height: "50px", margin: 0}} src={playIcon}></img>
+                  </PlayButton>
+                </PlaylistItem>
+              </PlaylistDiv>
+            ))}
+            </PlaylistSelectForm>
+          </ul>
+        </PlaylistContainer>
       : 
         <p>Loading playlists...</p>
       }
