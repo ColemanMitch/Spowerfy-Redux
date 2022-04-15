@@ -13,6 +13,7 @@ export const PlaylistItem = styled.li`
   flex-direction: row;
   width: 100%;
   list-style-type: none;
+  padding: 0;
 `;
 
 export const PlaylistName = styled.h3`
@@ -20,18 +21,22 @@ export const PlaylistName = styled.h3`
   margin-bottom: auto;
 `;
 
-export const PlaylistRadio = styled.input`
+export const PlayButton = styled.button`
   margin-top: auto;
+  margin-bottom: auto;
+  background-color: transparent;
+  border-width: 0;
+  height: 100%;
+  width: 15%;
 `;
 
 export const PlaylistDiv = styled.div`
   display: flex;
   flex-direction: row;
-  border: #858585 1px solid;
-  border-radius: 5px;
+  border: #303030 3px solid;
+  border-radius: 10px;
   min-width: 50%;
   max-height: 4%;
-  padding: 1%;
   margin: 1%;
 
   &:hover {
@@ -42,7 +47,8 @@ export const PlaylistDiv = styled.div`
 export const PlaylistImage = styled.img`
   height: 200px;
   margin-right: 20px;
-  margin-top: 10px;
+  margin-top: auto;
+  margin-bottom: auto;
 `;
 
 export const PlaylistSelectForm = styled.form`

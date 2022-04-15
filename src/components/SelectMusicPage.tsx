@@ -6,15 +6,13 @@ import {
   FixedHeader,
   AppTitle,
   Slider,
-  StartButton,
   DeviceDropdown } from "../styles/SelectMusicPage.style"
 
 
 const SelectMusicPage = (props: SelectMusicProps) => {
   return <div>
     <FixedHeader>
-      <AppTitle>Spowerfy 🍺</AppTitle>  
-      <StartButton onClick={props.startPlayback}>Click to start your power hour</StartButton>
+      <AppTitle>Spowerfy 🍺</AppTitle>
     </FixedHeader>
     <div className="app-body">
       <h2>Hello {props.user?.name},</h2>
@@ -31,16 +29,18 @@ const SelectMusicPage = (props: SelectMusicProps) => {
           </Slider>         
           <DeviceDropdown>
             <h3>Select your playback device</h3>
-            <PlaybackDeviceSelect
-              options={props.devices.map(device => ({ label: device.name, value: device.id }))}
-              onChange={props.handleDevice} 
-            />
+            <div onClick={props.reloadDevices}>
+              <PlaybackDeviceSelect
+                options={props.devices.map(device => ({ label: device.name, value: device.id }))}
+                onChange={props.handleDevice} 
+              />
+            </div>
           </DeviceDropdown>
         </div>
         :
         <p>Loading devices...</p>
       }
-      <Playlists playlists={props.playlists} activePlaylist={props.activePlaylist} setPlaylist={props.setPlaylist}/>
+      <Playlists playlists={props.playlists} startPlayback={props.startPlayback}/>
     </div>
   </div>
 }

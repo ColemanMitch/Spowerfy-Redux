@@ -27,15 +27,15 @@ export interface AppState {
   user?: User;
   activeSong?: Song;
   devices: Device[];
-  songLoaded: false;
+  loadingDevices: boolean;
+  songLoaded: boolean;
   interval: number;
   numberOfSongs: number;
 }
 
 export interface PlaylistsProps {
   playlists: Playlist[];
-  activePlaylist?: Playlist;
-  setPlaylist: (playlist: Playlist) => void;
+  startPlayback: (playlist: Playlist) => void;
 }
 
 export interface PlaylistsState {
@@ -47,9 +47,9 @@ export interface SelectMusicProps {
   devices: Device[];
   playlists: Playlist[];
   activePlaylist?: Playlist;
-  setPlaylist: (playlist: Playlist) => void;
+  reloadDevices: () => void;
   handleDevice: (device: any) => void;
-  startPlayback: () => void;
+  startPlayback: (playlist: Playlist) => void;
   changeNumberOfSongs: (song: any) => void;
   numberOfSongs: number;
 }

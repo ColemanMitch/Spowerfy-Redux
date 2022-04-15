@@ -48,7 +48,8 @@ class App extends Component<void, AppState> {
       devices: [],
       songLoaded: false,
       interval: 10,
-      numberOfSongs: 60
+      numberOfSongs: 60,
+      loadingDevices: true
     }
     this.spotifyService = new SpotifyService();
     
@@ -57,6 +58,7 @@ class App extends Component<void, AppState> {
     this.skipToNextSong = this.skipToNextSong.bind(this);
     this.changeInterval = this.changeInterval.bind(this);
     this.changeNumberOfSongs = this.changeNumberOfSongs.bind(this);
+    this.loadDevices = this.loadDevices.bind(this);
   }
 
   componentDidMount(): void {      
@@ -74,7 +76,8 @@ class App extends Component<void, AppState> {
       data.json().then((json: DevicesResponse) => {
         if(json.devices) {
           this.setState({
-            devices: json.devices
+            devices: json.devices,
+            loadingDevices: false
           });
         }
       })
@@ -92,26 +95,39 @@ class App extends Component<void, AppState> {
     });
   }
 
+  loadDevices(): void {
+    this.setState({
+      loadingDevices: true
+    });
+    this.spotifyService.fetchDevices().then(data => {
+      data.json().then((json: DevicesResponse) => {
+        if(json.devices) {
+          this.setState({
+            devices: json.devices,
+            loadingDevices: false
+          });
+        }
+      })
+    });
+  }
+
   handleDevice = (e): void => {
     // Trying to type this parameter is absolutely ridiculous, leaving as any
     this.setState({playbackDeviceId: e.value});
   }
 
-  setPlaylist = (playlist: Playlist): void => {
-    this.setState({activePlaylist: playlist});
-  }
-
-  startPlayback(): void {
-    if (!this.state.playbackDeviceId || !this.state.activePlaylist) {
+  startPlayback(playlist: Playlist): void {
+    if (!this.state.playbackDeviceId) {
       alert('Select both a device and a playlist to get this party started!');
     } else {
       this.spotifyService.useDevice(this.state.playbackDeviceId).then(res => {
         if (res.status === 204) {
-          setTimeout(() => this.spotifyService.startPlaylist(this.state.activePlaylist?.uri ?? '').then(() => {
+          setTimeout(() => this.spotifyService.startPlaylist(playlist?.uri ?? '').then(() => {
             // TODO: Fix using timeout here
             this.spotifyService.shuffle().then(() => {
               this.setState({
-                partyStarted: true
+                partyStarted: true,
+                activePlaylist: playlist
               });
               setTimeout(() => this.fetchCurrentlyPlaying(), 1000);
               // Sometimes currently playing fro spotify doesnt update for a bit
@@ -193,10 +209,10 @@ class App extends Component<void, AppState> {
                 playlists={this.state.playlists}
                 user={this.state.user}
                 activePlaylist={this.state.activePlaylist}
-                setPlaylist={this.setPlaylist} 
                 handleDevice={this.handleDevice}
                 startPlayback={this.startPlayback}
                 changeNumberOfSongs={this.changeNumberOfSongs}
+                reloadDevices={this.loadDevices}
                 numberOfSongs={this.state.numberOfSongs}
               />
             : 
