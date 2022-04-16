@@ -66,7 +66,7 @@ app.get('/login', function(req, res) {
 });
 
 app.get('/callback', function(req, res) {
-  let code = req.query.code || null
+  let code = req.query.code || null;
 
   let authOptions = {
     url: 'https://accounts.spotify.com/api/token',
@@ -76,12 +76,10 @@ app.get('/callback', function(req, res) {
       grant_type: 'authorization_code'
     },
     headers: {
-      'Authorization': 'Basic ' + (new Buffer(
-        CLIENT_ID + ':' + CLIENT_SECRET
-      ).toString('base64'))
+      'Authorization': 'Basic ' + Buffer.from(CLIENT_ID + ':' + CLIENT_SECRET).toString('base64')
     },
     json: true
-  }
+  };
   request.post(authOptions, function(error, response, body) {
     var access_token = body.access_token
     let uri = process.env.FRONTEND_URI || 'http://localhost:3000'
@@ -90,5 +88,5 @@ app.get('/callback', function(req, res) {
 })
 
 let port = process.env.PORT || 8888;
-console.log(`Listening on port ${port}. Go /login to initiate authentication flow.`);
+console.log(`${COL.GREEN}Server running. Go to ${COL.YELLOW}http://localhost:${port}/login${COL.GREEN} to initiate authentication flow.${COL.END}`);
 app.listen(port);
