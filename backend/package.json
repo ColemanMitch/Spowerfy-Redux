@@ -4,8 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node src/server.ts",
-    "pull-creds": "cypress run --spec cypress/integration/retrieve-api-keys.spec.ts --browser chrome"
+    "start": "ts-node src/server.ts"
   },
   "dependencies": {
     "express": "^4.15.4",

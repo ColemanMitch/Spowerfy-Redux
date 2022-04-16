@@ -24,7 +24,7 @@ You can also store your credentials locally in spowerfy-redux/backend/src/spotif
 client_id_here
 client_secret_here
 ```
-(Even though this file is in the .gitignore, be sure you don't commit it.)
+(Even though this file is in the .gitignore, be sure you don't commit it)
 
 Then start the backend:
 
