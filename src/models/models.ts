@@ -2,6 +2,7 @@ export interface TimerState {
   time: TimerCount; 
   songCount: number;
   ticking: boolean;
+  partyOver: boolean;
 }
 
 export interface TimerProps {
