@@ -8,6 +8,7 @@
 #### Technologies used:
 * React
 * Node.js
+* TypeScript
 * Heroku
 * OAuth
 * HTML
