@@ -1,16 +1,14 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { COL } from './colors';
+import express from 'express';
+import request from 'request';
 
-let express = require('express')
-let request = require('request')
-let querystring = require('querystring')
-
-let app = express()
+let app = express();
 
 let redirect_uri = 
   process.env.REDIRECT_URI || 
-  'http://localhost:8888/callback'
+  'http://localhost:8888/callback';
 
 let CLIENT_SECRET = '';
 let CLIENT_ID = '';
@@ -42,17 +40,30 @@ if(!process.env.SPOTIFY_CLIENT_ID) {
   }
 }
 
+function generateQueryString(params: { [key: string]: string }) {
+  let str = '?';
+
+  const arr = Object.entries(params);
+  for(let i = 0; i < arr.length; i++) {
+    const [param, value] = arr[i];
+    str += encodeURIComponent(param) + '=' + encodeURIComponent(value) + (i < arr.length - 1 ? '&' : '');
+  }
+
+  return str;
+}
+
 app.get('/login', function(req, res) {
-  res.redirect('https://accounts.spotify.com/authorize?' +
-    querystring.stringify({
+  res.redirect('https://accounts.spotify.com/authorize' +
+    generateQueryString({
       response_type: 'code',
       client_id: CLIENT_ID,
       scope: 'user-read-playback-state ' +
       'user-modify-playback-state ' +
       'user-read-currently-playing',
       redirect_uri
-    }))
-})
+    })
+  );
+});
 
 app.get('/callback', function(req, res) {
   let code = req.query.code || null
@@ -75,9 +86,9 @@ app.get('/callback', function(req, res) {
     var access_token = body.access_token
     let uri = process.env.FRONTEND_URI || 'http://localhost:3000'
     res.redirect(uri + '?access_token=' + access_token)
-  })
+  });
 })
 
-let port = process.env.PORT || 8888
-console.log(`Listening on port ${port}. Go /login to initiate authentication flow.`)
-app.listen(port)
+let port = process.env.PORT || 8888;
+console.log(`Listening on port ${port}. Go /login to initiate authentication flow.`);
+app.listen(port);
