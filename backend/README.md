@@ -16,6 +16,19 @@ Write the below commands in your terminal (replacing XXXX AND YYYY with your acu
 ```
 export SPOTIFY_CLIENT_ID=XXXX
 export SPOTIFY_CLIENT_SECRET=YYYY
+```
+
+You can also store your credentials locally in spowerfy-redux/backend/src/spotify.credentials in the following format:
+
+```
+client_id_here
+client_secret_here
+```
+(Even though this file is in the .gitignore, be sure you don't commit it.)
+
+Then start the backend:
+
+```
 npm start
 ```
 
