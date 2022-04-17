@@ -27,8 +27,13 @@ export const AppBody = styled.div`
   justify-content: center !important;
 `
 
+const AppContainer = styled.div`
+`
+
 const PartyTime = styled(AppBody)`
+  height: 100%;
   padding-top: 0 !important;
+  margin-bottom: 50px;
   display: block;
   text-align: center;
 `;
@@ -208,7 +213,7 @@ class App extends Component<void, AppState> {
 
   render() {
     return (
-      <div className="App">
+      <AppContainer className="App">
         { this.state.partyStarted ?
           <PartyTime className="app-body">
             <header>
@@ -216,30 +221,30 @@ class App extends Component<void, AppState> {
             </header>
             <h2>Currently Playing: </h2>
             <Timer paused={this.state.paused} skipToNextSong={this.skipToNextSong} interval={this.state.interval} numberOfSongs={this.state.numberOfSongs}></Timer>
-              { this.state.activeSong ?
+            { this.state.activeSong ?
+                <div style={{height: "100%"}}>
+                  <img src={this.state.activeSong.album.images[0].url} alt='album art of the current track'></img>
+                  <h3 style={{fontWeight: 'bold'}}>{this.state.activeSong.name}</h3>
+                  <h4 style={{paddingBottom: '5%'}}>{this.state.activeSong.album.artists[0].name}</h4> 
                   <div>
-                    <img src={this.state.activeSong.album.images[0].url} alt='album art of the current track'></img>
-                    <h3 style={{fontWeight: 'bold'}}>{this.state.activeSong.name}</h3>
-                    <h4 style={{paddingBottom: '5%'}}>{this.state.activeSong.album.artists[0].name}</h4> 
-                    <div>
-                    { !this.state.paused ?
-                    <Pause style={{cursor: "pointer"}} onClick={this.pauseCurrentPlayback}/>
-                  :
-                    <PlayArrow style={{cursor: "pointer"}} onClick={this.resumeCurrentPlayback}/>
-                  } 
-                      <p>Change the interval between songs?</p> 
-                      <RangeStepInput
-                      min={5} max={120} onChange={this.changeInterval}
-                      value={this.state.interval} step={5}/>
-                      {this.state.interval} seconds 
-                  </div>
+                  { !this.state.paused ?
+                  <Pause style={{cursor: "pointer"}} onClick={this.pauseCurrentPlayback}/>
+                :
+                  <PlayArrow style={{cursor: "pointer"}} onClick={this.resumeCurrentPlayback}/>
+                } 
+                    <p>Change the interval between songs?</p> 
+                    <RangeStepInput
+                    min={5} max={120} onChange={this.changeInterval}
+                    value={this.state.interval} step={5}/>
+                    {this.state.interval} seconds 
                 </div>
-              :
-                <p>Loading playback..</p>
-              }
+              </div>
+            :
+              <p>Loading playback..</p>
+            }
           </PartyTime>
         :
-          <div>
+          <div style={{height: "100%"}}>
             { this.state.user ?
               <SelectMusicPage 
                 devices={this.state.devices} 
@@ -260,7 +265,7 @@ class App extends Component<void, AppState> {
         <footer>
           <p>Made by <a href="https://www.github.com/ColemanMitch" >Cole Mitchell</a> & <a href="https://github.com/dwilliams27" >David Williams</a></p>
         </footer>
-    </div>
+    </AppContainer>
     );
   }
 }

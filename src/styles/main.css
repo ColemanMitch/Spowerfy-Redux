@@ -1,6 +1,5 @@
-/* TODO: Ensure body fills entire page */
-html {
-  height: 100%;
+html, body, #root, .App {
+  height: calc(100% - 25px);
 }
 
 /* Gradient doesnt work with styled-components */
@@ -46,7 +45,7 @@ input[type=text] {
 }
 
 body {
-  min-height: 100%;
+  min-height: 100vh;
   font-family: Proxima Nova; 
 }
 
@@ -129,12 +128,14 @@ button:hover {
 }
 
 footer {
+  position: fixed;
   width: 100%;
+  bottom: 0;
   display: flex;
   justify-content: center;
   background-color: black;
   color: white;
-  min-height: 20px;
+  min-height: 50px;
   max-height: 50px;
   margin: 0;
   padding-top: 0;

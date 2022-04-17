@@ -10,7 +10,7 @@ import {
 
 
 const SelectMusicPage = (props: SelectMusicProps) => {
-  return <div>
+  return <div style={{paddingBottom: "50px"}}>
     <FixedHeader>
       <AppTitle>Spowerfy 🍺</AppTitle>
     </FixedHeader>

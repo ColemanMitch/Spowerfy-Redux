@@ -22,7 +22,6 @@ export const SignInButton = styled.button`
 export const LoginAppBody = styled.div`
   flex-direction: row;
   align-items: center;
-  padding-bottom: 50%;
   height: 100%;
   background: linear-gradient(-45deg, #e4b4a4, #e9bbcd, #77c0b0, #7db6aa);
   background-size: 400% 400%;
