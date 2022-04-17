@@ -36,7 +36,7 @@ const SelectMusicPage = (props: SelectMusicProps) => {
       </SubHeader>
       { props.devices ?
         <PartyConfig>
-          <h3>For how many songs would you like this session?</h3> 
+          <h3>Select number of songs to play</h3> 
           <Slider>
             <RangeStepInput style={{width: '50%'}}
             min={10} max={120} value={props.numberOfSongs} step={5} onChange={props.changeNumberOfSongs}/>

@@ -23,11 +23,13 @@ export const PlaylistName = styled.h3`
 `;
 
 export const PlayButton = styled.button`
+  border-radius: ${SMALL};
   margin-top: auto;
   margin-bottom: auto;
   background-color: transparent;
   border-width: 0;
   height: 100%;
+  min-width: 75px;
   width: 15%;
 `;
 
@@ -46,10 +48,12 @@ export const PlaylistDiv = styled.div`
 `;
 
 export const PlaylistImage = styled.img`
+  border-radius: ${SMALL};
   height: 200px;
   margin-right: ${LARGE};
-  margin-top: auto;
-  margin-bottom: auto;
+  margin-left: ${SMALL};
+  margin-top: ${SMALL};
+  margin-bottom: ${SMALL};
 `;
 
 export const PlaylistSelectForm = styled.form`
