@@ -40,7 +40,7 @@ export const PlaylistDiv = styled.div`
   margin: 1%;
 
   &:hover {
-    background-color: #1ed05e;
+    background-color: #1DB954;
   }
 `;
 

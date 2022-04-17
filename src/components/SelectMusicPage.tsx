@@ -7,7 +7,14 @@ import {
   AppTitle,
   Slider,
   DeviceDropdown } from "../styles/SelectMusicPage.style"
+import styled from "styled-components";
 
+const SubHeader = styled.div`
+  background-color: #1DB954;
+  box-shadow: 0px 5px 5px 5px #1DB954;
+  padding-top: 10px;
+  margin-bottom: 25px;
+`;
 
 const SelectMusicPage = (props: SelectMusicProps) => {
   return <div style={{paddingBottom: "50px"}}>
@@ -15,10 +22,10 @@ const SelectMusicPage = (props: SelectMusicProps) => {
       <AppTitle>Spowerfy 🍺</AppTitle>
     </FixedHeader>
     <div className="app-body">
-      <h2>Hello {props.user?.name},</h2>
-      <h3>Let's get this party started by configuring the number of songs, playback device, and playlist below!</h3>
-      <hr></hr>
-      <br></br>
+      <SubHeader>
+        <h2 style={{height: "auto"}}>Hello {props.user?.name},</h2>
+        <h3 style={{textAlign: "center"}}>Let's get this party started by configuring the number of songs, playback device, and playlist below!</h3>
+      </SubHeader>
       { props.devices ?
         <div>
           <h3>For how many songs would you like this session?</h3> 
