@@ -17,7 +17,7 @@ export const AppTitleNonFixed = styled.h1`
 `;
 
 export const AppBody = styled.div`
-  padding-top: 55px;
+  padding-top: 75px;
   background: linear-gradient(-45deg, #e4b4a4, #e9bbcd, #77c0b0, #7db6aa);
   background-size: 400% 400%;
   -webkit-animation: gradient 15s ease infinite;

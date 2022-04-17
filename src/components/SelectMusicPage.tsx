@@ -8,12 +8,20 @@ import {
   Slider,
   DeviceDropdown } from "../styles/SelectMusicPage.style"
 import styled from "styled-components";
+import { HUGE, LARGE, SMALL, XSMALL } from "../styles/sizes";
 
 const SubHeader = styled.div`
-  background-color: #1DB954;
-  box-shadow: 0px 5px 5px 5px #1DB954;
-  padding-top: 10px;
-  margin-bottom: 25px;
+  background-color: #1f1f1f;
+  box-shadow: 0px 2px 2px 2px #1f1f1f;
+  color: #d6d6d6;
+  padding-top: ${SMALL};
+  padding-bottom: ${SMALL};
+  margin-bottom: ${HUGE};
+`;
+
+const PartyConfig = styled.div`
+  margin-top: calc(${LARGE} * 2);
+  margin-bottom: ${HUGE};
 `;
 
 const SelectMusicPage = (props: SelectMusicProps) => {
@@ -27,7 +35,7 @@ const SelectMusicPage = (props: SelectMusicProps) => {
         <h3 style={{textAlign: "center"}}>Let's get this party started by configuring the number of songs, playback device, and playlist below!</h3>
       </SubHeader>
       { props.devices ?
-        <div>
+        <PartyConfig>
           <h3>For how many songs would you like this session?</h3> 
           <Slider>
             <RangeStepInput style={{width: '50%'}}
@@ -43,7 +51,7 @@ const SelectMusicPage = (props: SelectMusicProps) => {
               />
             </div>
           </DeviceDropdown>
-        </div>
+        </PartyConfig>
         :
         <p>Loading devices...</p>
       }

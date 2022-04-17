@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { LARGE, SMALL } from "./sizes";
 
 export const PlaylistContainer = styled.div`
   min-height: 20rem;
@@ -34,7 +35,7 @@ export const PlaylistDiv = styled.div`
   display: flex;
   flex-direction: row;
   border: #303030 3px solid;
-  border-radius: 10px;
+  border-radius: ${SMALL};
   min-width: 50%;
   max-height: 4%;
   margin: 1%;
@@ -46,7 +47,7 @@ export const PlaylistDiv = styled.div`
 
 export const PlaylistImage = styled.img`
   height: 200px;
-  margin-right: 20px;
+  margin-right: ${LARGE};
   margin-top: auto;
   margin-bottom: auto;
 `;

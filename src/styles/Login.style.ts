@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { MEDIUM } from "./sizes";
 
 export const SignInButton = styled.button`
   font-family: Proxima Nova;
@@ -6,7 +7,7 @@ export const SignInButton = styled.button`
   background-color: #1ed05e;
   color: white;
   border: #c9c9c9 solid 1px;
-  border-radius: 15px;
+  border-radius: ${MEDIUM};
   margin-top: 100px;
   height: 40px !important;
   width: 250px;
