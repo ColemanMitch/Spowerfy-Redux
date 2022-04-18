@@ -25,11 +25,11 @@ const PartyConfig = styled.div`
 `;
 
 const SelectMusicPage = (props: SelectMusicProps) => {
-  return <div style={{paddingBottom: "50px"}}>
+  return <div style={{paddingBottom: "125px", height: "inherit"}}>
     <FixedHeader>
       <AppTitle>Spowerfy 🍺</AppTitle>
     </FixedHeader>
-    <div className="app-body">
+    <div className="app-body" style={{height: "100%"}}>
       <SubHeader>
         <h2 style={{height: "auto"}}>Hello {props.user?.name},</h2>
         <h3 style={{textAlign: "center"}}>Let's get this party started by configuring the number of songs, playback device, and playlist below!</h3>
