@@ -52,7 +52,8 @@ class App extends Component<void, AppState> {
       interval: 10,
       numberOfSongs: 60,
       paused: false,
-      loadingDevices: true
+      loadingDevices: true,
+      partyOver: false
     }
     this.spotifyService = new SpotifyService();
     
@@ -64,6 +65,7 @@ class App extends Component<void, AppState> {
     this.pauseCurrentPlayback = this.pauseCurrentPlayback.bind(this);
     this.resumeCurrentPlayback = this.resumeCurrentPlayback.bind(this);
     this.loadDevices = this.loadDevices.bind(this);
+    this.partyOver = this.partyOver.bind(this);
   }
 
   componentDidMount(): void {      
@@ -196,6 +198,12 @@ class App extends Component<void, AppState> {
     });
   }
 
+  partyOver(): void {
+    this.setState({
+      partyOver: true,
+    })
+  }
+
   changeInterval(e) {
     const newVal = forceNumber(e.target.value);
     this.setState({interval: newVal});
@@ -215,10 +223,10 @@ class App extends Component<void, AppState> {
               <AppTitleNonFixed>Spowerfy 🍺</AppTitleNonFixed>
             </header>
             <h2>Currently Playing: </h2>
-            <Timer paused={this.state.paused} skipToNextSong={this.skipToNextSong} interval={this.state.interval} numberOfSongs={this.state.numberOfSongs}></Timer>
+            <Timer paused={this.state.paused} skipToNextSong={this.skipToNextSong} partyOver={this.partyOver} interval={this.state.interval} numberOfSongs={this.state.numberOfSongs}></Timer>
               { this.state.activeSong ?
                   <div>
-                    <img src={this.state.activeSong.album.images[0].url} alt='album art of the current track'></img>
+                    <img src={!this.state.partyOver ? this.state.activeSong.album.images[0].url : "https://live.staticflickr.com/134/375385283_1a9b80c897_z.jpg" } alt='album art of the current track'></img>
                     <h3 style={{fontWeight: 'bold'}}>{this.state.activeSong.name}</h3>
                     <h4 style={{paddingBottom: '5%'}}>{this.state.activeSong.album.artists[0].name}</h4> 
                     <div>
@@ -233,7 +241,7 @@ class App extends Component<void, AppState> {
                       value={this.state.interval} step={5}/>
                       {this.state.interval} seconds 
                   </div>
-                </div>
+                </div>  
               :
                 <p>Loading playback..</p>
               }

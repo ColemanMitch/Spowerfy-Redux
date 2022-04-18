@@ -69,6 +69,7 @@ class Timer extends React.Component<TimerProps, TimerState> {
               this.setState({
                 partyOver: true,
               })
+              this.props.partyOver();
             }
             return;
           }

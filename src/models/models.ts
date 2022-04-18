@@ -7,6 +7,7 @@ export interface TimerState {
 
 export interface TimerProps {
   skipToNextSong: () => void;
+  partyOver: () => void;
   interval: number;
   numberOfSongs: number;
   paused: boolean;
@@ -26,6 +27,7 @@ export interface AppState {
   playlists: Playlist[];
   filteredPlaylists: Playlist[];
   partyStarted: boolean;
+  partyOver: boolean;
   user?: User;
   activeSong?: Song;
   devices: Device[];
