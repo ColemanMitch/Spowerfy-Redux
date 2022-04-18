@@ -44,10 +44,6 @@ class Timer extends React.Component<TimerProps, TimerState> {
         });
       }
     }
-    if (this.state.songCount >= this.props.numberOfSongs)
-    {
-      console.log('party over!')
-    }
   }
 
   createTimeObj(seconds: number): TimerCount {
@@ -61,7 +57,6 @@ class Timer extends React.Component<TimerProps, TimerState> {
         // if it's playing (not paused)
         if (this.state.time.seconds === 0) {
           if (this.state.time.minutes === 0) {
-            console.log("times up!");
             if (this.state.songCount < this.props.numberOfSongs) {
               this.props.skipToNextSong();
               this.setState({
