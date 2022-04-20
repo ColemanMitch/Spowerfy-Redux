@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { LARGE, SMALL } from "./sizes";
 
 export const PlaylistContainer = styled.div`
   min-height: 20rem;
@@ -22,11 +23,13 @@ export const PlaylistName = styled.h3`
 `;
 
 export const PlayButton = styled.button`
+  border-radius: ${SMALL};
   margin-top: auto;
   margin-bottom: auto;
   background-color: transparent;
   border-width: 0;
   height: 100%;
+  min-width: 75px;
   width: 15%;
 `;
 
@@ -34,21 +37,23 @@ export const PlaylistDiv = styled.div`
   display: flex;
   flex-direction: row;
   border: #303030 3px solid;
-  border-radius: 10px;
+  border-radius: ${SMALL};
   min-width: 50%;
   max-height: 4%;
   margin: 1%;
 
   &:hover {
-    background-color: #1ed05e;
+    background-color: #1DB954;
   }
 `;
 
 export const PlaylistImage = styled.img`
+  border-radius: ${SMALL};
   height: 200px;
-  margin-right: 20px;
-  margin-top: auto;
-  margin-bottom: auto;
+  margin-right: ${LARGE};
+  margin-left: ${SMALL};
+  margin-top: ${SMALL};
+  margin-bottom: ${SMALL};
 `;
 
 export const PlaylistSelectForm = styled.form`
