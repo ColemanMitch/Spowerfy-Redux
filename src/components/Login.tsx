@@ -1,4 +1,4 @@
-import { AppTitleNonFixed } from "../App";
+import { AppTitleNonFixed } from "../styles/App.style";
 import { LOGIN_URL, LOGIN_URL_LOCAL } from "../config/constants";
 import { SignInButton, LoginAppBody } from "../styles/Login.style";
 

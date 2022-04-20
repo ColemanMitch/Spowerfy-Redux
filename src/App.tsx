@@ -10,34 +10,11 @@ import {RangeStepInput} from 'react-range-step-input';
 import forceNumber from 'force-number';
 import Pause from '@material-ui/icons/Pause';
 import PlayArrow from '@material-ui/icons/PlayArrow';
-import styled from 'styled-components';
-
-export const AppTitleNonFixed = styled.h1`
-  text-align: center;
-`;
-
-export const AppBody = styled.div`
-  padding-top: 75px;
-  background: linear-gradient(-45deg, #e4b4a4, #e9bbcd, #77c0b0, #7db6aa);
-  background-size: 400% 400%;
-  -webkit-animation: gradient 15s ease infinite;
-  animation: gradient 15s ease infinite;
-  display: flex !important;
-  flex-direction: column;
-  justify-content: center !important;
-`
-
-const AppContainer = styled.div`
-`
-
-const PartyTime = styled(AppBody)`
-  height: 100%;
-  padding-top: 0 !important;
-  margin-bottom: 50px;
-  display: block;
-  text-align: center;
-`;
-
+import { 
+  AppTitleNonFixed, 
+  AppContainer, 
+  PartyTime, 
+  AlbumArt } from './styles/App.style';
 class App extends Component<void, AppState> {
   private spotifyService: SpotifyService;
 
@@ -223,7 +200,7 @@ class App extends Component<void, AppState> {
             <Timer paused={this.state.paused} skipToNextSong={this.skipToNextSong} interval={this.state.interval} numberOfSongs={this.state.numberOfSongs}></Timer>
             { this.state.activeSong ?
                 <div style={{height: "100%"}}>
-                  <img src={this.state.activeSong.album.images[0].url} alt='album art of the current track'></img>
+                  <AlbumArt src={this.state.activeSong.album.images[0].url} alt='album art of the current track'></AlbumArt>
                   <h3 style={{fontWeight: 'bold'}}>{this.state.activeSong.name}</h3>
                   <h4 style={{paddingBottom: '5%'}}>{this.state.activeSong.album.artists[0].name}</h4> 
                   <div>
