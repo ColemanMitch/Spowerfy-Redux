@@ -14,10 +14,10 @@ animation: gradient 15s ease infinite;
 display: flex !important;
 flex-direction: column;
 justify-content: center !important;
-`
+`;
 
 export const AppContainer = styled.div`
-`
+`;
 
 export const PartyTime = styled(AppBody)`
 height: 100%;
@@ -35,4 +35,4 @@ export const AlbumArt = styled.img`
         height: 300px;
     }
     height: 200px;
-`
+`;
