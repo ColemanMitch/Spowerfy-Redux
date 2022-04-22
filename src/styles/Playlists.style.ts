@@ -1,15 +1,20 @@
 import styled from "styled-components";
-import { LARGE, SMALL } from "./sizes";
+import { LARGE, SMALL, device } from "./sizes";
 
 export const PlaylistContainer = styled.div`
   min-height: 20rem;
+  margin: auto;
+  padding-top: 2rem;
 `;
 
 export const PlaylistItem = styled.li`
   align-content: center;
   vertical-align: middle;
   justify-content: space-between;
-  font-size: 32px;
+  @media ${device.tablet} {
+    font-size: 32px;
+  }
+  font-size: 12px;
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -29,9 +34,23 @@ export const PlayButton = styled.button`
   background-color: transparent;
   border-width: 0;
   height: 100%;
-  min-width: 75px;
+  max-width: 25px; 
+  @media ${device.tablet} {
+    min-width: 75px;
+  }
   width: 15%;
 `;
+
+export const PlayButtonIcon = styled.img`
+  @media ${device.tablet} {
+    height: 50px;
+    width: 50px;
+  }  
+  height: 15px;
+  width: 15px;
+  margin: 0;
+`;
+
 
 export const PlaylistDiv = styled.div`
   display: flex;
@@ -49,7 +68,10 @@ export const PlaylistDiv = styled.div`
 
 export const PlaylistImage = styled.img`
   border-radius: ${SMALL};
-  height: 200px;
+  height: 50px;
+  @media ${device.tablet} {
+    height: 200px;
+  }
   margin-right: ${LARGE};
   margin-left: ${SMALL};
   margin-top: ${SMALL};

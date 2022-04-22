@@ -1,17 +1,38 @@
 import React from "react";
 import styled from "styled-components";
+import { device } from "./styles/sizes";
 import { TimerCount, TimerProps, TimerState } from "./models/models";
 
 const START_TIME = 10;
 
+const TimerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+  @media ${device.mobileL} {
+    flex-direction: row
+  }
+`
+
 const DrinkCounter = styled.div`
-  padding-left: 15%;
-  float: left;
+  @media ${device.mobileL} {
+    padding-left: 15%;
+    float: left;
+  }  
+  padding-left: 5%;
+  padding-right: 5%;
+  min-width: 164px;
 `;
 
 const TimeCounter = styled.div`
-  padding-right: 15%;
-  float: right;
+  @media ${device.mobileL} {
+    padding-right: 15%;
+    float: right;
+  }  
+  padding-left: 5%;
+  padding-right: 5%;
+  min-width: 132px;
 `;
 
 class Timer extends React.Component<TimerProps, TimerState> {
@@ -81,7 +102,7 @@ class Timer extends React.Component<TimerProps, TimerState> {
 
   render() {
     return (
-      <div>
+      <TimerContainer>
         <DrinkCounter>
           <h4>Currently on</h4>
           <h1>
@@ -94,7 +115,7 @@ class Timer extends React.Component<TimerProps, TimerState> {
             {this.state.time.minutes}m {this.state.time.seconds}s
           </h1>
         </TimeCounter>
-      </div>
+      </TimerContainer>
     );
   }
 }
