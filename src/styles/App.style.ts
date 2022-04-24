@@ -3,6 +3,8 @@ import { device } from "./sizes";
 
 export const AppTitleNonFixed = styled.h1`
 text-align: center;
+left: 0%;
+right: 0%;
 `;
 
 export const AppBody = styled.div`

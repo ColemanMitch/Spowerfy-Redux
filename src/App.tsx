@@ -10,6 +10,7 @@ import {RangeStepInput} from 'react-range-step-input';
 import forceNumber from 'force-number';
 import Pause from '@material-ui/icons/Pause';
 import PlayArrow from '@material-ui/icons/PlayArrow';
+import { ArrowBackIos } from '@material-ui/icons';
 import { 
   AppTitleNonFixed, 
   AppContainer, 
@@ -46,6 +47,7 @@ class App extends Component<void, AppState> {
     this.pauseCurrentPlayback = this.pauseCurrentPlayback.bind(this);
     this.resumeCurrentPlayback = this.resumeCurrentPlayback.bind(this);
     this.loadDevices = this.loadDevices.bind(this);
+    this.goBack = this.goBack.bind(this);
   }
 
   componentDidMount(): void {      
@@ -114,7 +116,8 @@ class App extends Component<void, AppState> {
             this.spotifyService.shuffle().then(() => {
               this.setState({
                 partyStarted: true,
-                activePlaylist: playlist
+                activePlaylist: playlist,
+                paused: false
               });
               setTimeout(() => this.fetchCurrentlyPlaying(), 1000);
               // Sometimes currently playing fro spotify doesnt update for a bit
@@ -188,12 +191,20 @@ class App extends Component<void, AppState> {
     this.setState({numberOfSongs: newVal});
   }
 
+  goBack(): void {
+    this.pauseCurrentPlayback();
+    this.setState({
+      partyStarted: false,
+    })
+  }
+
   render() {
     return (
       <AppContainer className="App">
         { this.state.partyStarted ?
           <PartyTime className="app-body">
             <header>
+            { this.state.activeSong ? <ArrowBackIos onClick={() => this.goBack()} style={{ float: 'left', cursor: 'pointer', color: 'white', marginTop: "1rem", marginLeft: "1rem"}}/> : "hi"}
               <AppTitleNonFixed>Spowerfy 🍺</AppTitleNonFixed>
             </header>
             <h2>Currently Playing: </h2>
