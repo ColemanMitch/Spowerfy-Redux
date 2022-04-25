@@ -43,11 +43,12 @@ const SelectMusicPage = (props: SelectMusicProps) => {
             <span id="slideroutput">{props.numberOfSongs}</span>             
           </Slider>         
           <DeviceDropdown>
-            <h3>Select your playback device</h3>
+            <h3 style={{ paddingBottom: '1rem'}} >Select your playback device</h3>
             <div onClick={props.reloadDevices}>
               <PlaybackDeviceSelect
                 options={props.devices.map(device => ({ label: device.name, value: device.id }))}
                 onChange={props.handleDevice} 
+                placeholder={props.playbackDeviceId !== '' ? props.devices.find(d => d.id === props.playbackDeviceId)?.name : 'Select a device' }
               />
             </div>
           </DeviceDropdown>

@@ -244,6 +244,7 @@ class App extends Component<void, AppState> {
                 changeNumberOfSongs={this.changeNumberOfSongs}
                 reloadDevices={this.loadDevices}
                 numberOfSongs={this.state.numberOfSongs}
+                playbackDeviceId={this.state.playbackDeviceId}
               />
             : 
               <Login />

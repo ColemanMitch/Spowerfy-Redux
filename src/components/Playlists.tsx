@@ -38,7 +38,9 @@ class Playlists extends Component<PlaylistsProps, PlaylistsState> {
 
   render () {
     return <div>
-      <PlaylistFilter placeholder="Start typing to filter for your playlist" onChange={ this.filterPlaylist } value={ this.state.playlistFilter }/>
+      <h3>Start typing to filter for your playlist</h3> 
+      <PlaylistFilter placeholder="Type to filter for your playlist" onChange={ this.filterPlaylist } value={ this.state.playlistFilter }/>
+      <hr style={{ marginTop: '2rem', color: '#000'}}/>
       { this.props.playlists.length > 0 ?
         <PlaylistContainer>
             <PlaylistSelectForm>
