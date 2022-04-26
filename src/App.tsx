@@ -15,6 +15,7 @@ import {
   AppContainer, 
   PartyTime, 
   AlbumArt } from './styles/App.style';
+import partyOver from "./images/partyOver.jpg";
 class App extends Component<void, AppState> {
   private spotifyService: SpotifyService;
 
@@ -208,9 +209,9 @@ class App extends Component<void, AppState> {
             <Timer paused={this.state.paused} skipToNextSong={this.skipToNextSong} partyOver={this.partyOver} interval={this.state.interval} numberOfSongs={this.state.numberOfSongs}></Timer>
             { this.state.activeSong ?
                 <div style={{height: "100%"}}>
-                  <AlbumArt src={this.state.activeSong.album.images[0].url} alt='album art of the current track'></AlbumArt>
-                  <h3 style={{fontWeight: 'bold'}}>{this.state.activeSong.name}</h3>
-                  <h4 style={{paddingBottom: '5%'}}>{this.state.activeSong.album.artists[0].name}</h4> 
+                  <AlbumArt src={!this.state.partyOver ? this.state.activeSong.album.images[0].url : partyOver } alt='album art of the current track'></AlbumArt>
+                  <h3 style={{fontWeight: 'bold'}}>{!this.state.partyOver ? this.state.activeSong.name : ""}</h3>
+                  <h4 style={{paddingBottom: '5%'}}>{!this.state.partyOver ? this.state.activeSong.album.artists[0].name: ""}</h4> 
                   <div>
                   { !this.state.paused ?
                   <Pause style={{cursor: "pointer"}} onClick={this.pauseCurrentPlayback}/>

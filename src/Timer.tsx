@@ -121,15 +121,17 @@ class Timer extends React.Component<TimerProps, TimerState> {
               Drink {this.state.songCount}/{this.props.numberOfSongs}
             </h1>
           </DrinkCounter>
+          <h4>
+            {this.state.partyOver && (
+            "You finished!"
+            )}
+          </h4>
           <TimeCounter>
             <h4>Time Remaining:</h4>
             <h1>
               {this.state.time.minutes}m {this.state.time.seconds}s
             </h1>
           </TimeCounter>
-          {this.state.partyOver && (
-          "You finished!"
-          )}
       </TimerContainer>
     );
   }
