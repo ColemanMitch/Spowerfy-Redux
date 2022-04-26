@@ -1,11 +1,11 @@
-/* TODO: Ensure body fills entire page */
-html {
-  height: 100%;
+html, body, #root, .App {
+  height: calc(100% - 25px);
 }
 
 /* Gradient doesnt work with styled-components */
 .app-body {
-  padding-top: 65px;
+  overflow: auto;
+  padding-top: 75px;
 	background: linear-gradient(-45deg, #e4b4a4, #e9bbcd, #77c0b0, #7db6aa);
 	background-size: 400% 400%;
 	-webkit-animation: gradient 15s ease infinite;
@@ -46,7 +46,7 @@ input[type=text] {
 }
 
 body {
-  min-height: 100%;
+  min-height: 100vh;
   font-family: Proxima Nova; 
 }
 
@@ -129,12 +129,14 @@ button:hover {
 }
 
 footer {
+  position: fixed;
   width: 100%;
+  bottom: 0;
   display: flex;
   justify-content: center;
   background-color: black;
   color: white;
-  min-height: 20px;
+  min-height: 50px;
   max-height: 50px;
   margin: 0;
   padding-top: 0;

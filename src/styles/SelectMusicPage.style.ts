@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Select from "react-select";
+import { HUGE, SMALL } from "./sizes";
 
 export const PlaybackDeviceSelect = styled(Select)`
   margin: auto;
@@ -13,6 +14,8 @@ export const FixedHeader = styled.header`
   flex-direction: row;
   background: black;
   justify-content: space-between;
+  font-size: 20px;
+  height: 75px;
   z-index: 2;
 `;
 
@@ -36,8 +39,8 @@ export const StartButton = styled.button`
   background-color: #1ed05e;
   color: white;
   border: black solid 1px;
-  border-radius: 10px;
-  max-height: 25px;
+  border-radius: ${SMALL};
+  max-height: ${HUGE};
   max-width: 250px;
   float: right;
 `;

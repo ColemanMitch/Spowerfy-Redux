@@ -3,6 +3,7 @@ import { PlaylistsProps, PlaylistsState } from "../models/models";
 import { 
   PlaylistContainer,
   PlaylistItem,
+  PlayButtonIcon,
   PlaylistName,
   PlaylistDiv,
   PlaylistImage,
@@ -40,7 +41,6 @@ class Playlists extends Component<PlaylistsProps, PlaylistsState> {
       <PlaylistFilter placeholder="Start typing to filter for your playlist" onChange={ this.filterPlaylist } value={ this.state.playlistFilter }/>
       { this.props.playlists.length > 0 ?
         <PlaylistContainer>
-          <ul>
             <PlaylistSelectForm>
             { this.props.playlists.filter((playlists) => this.checkIncludes(playlists.name.toLowerCase(), this.state.playlistFilter.toLowerCase())).map((pl) => (
               <PlaylistDiv key={pl.uri}>
@@ -48,13 +48,12 @@ class Playlists extends Component<PlaylistsProps, PlaylistsState> {
                 <PlaylistItem>
                   <PlaylistName>{pl.name}</PlaylistName>
                   <PlayButton onClick={() => this.startPlayback(pl.uri)} type="button">
-                    <img style={{width: "50px", height: "50px", margin: 0}} src={playIcon}></img>
+                    <PlayButtonIcon src={playIcon}></PlayButtonIcon>
                   </PlayButton>
                 </PlaylistItem>
               </PlaylistDiv>
             ))}
             </PlaylistSelectForm>
-          </ul>
         </PlaylistContainer>
       : 
         <p>Loading playlists...</p>

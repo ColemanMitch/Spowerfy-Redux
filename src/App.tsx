@@ -10,29 +10,11 @@ import {RangeStepInput} from 'react-range-step-input';
 import forceNumber from 'force-number';
 import Pause from '@material-ui/icons/Pause';
 import PlayArrow from '@material-ui/icons/PlayArrow';
-import styled from 'styled-components';
-
-export const AppTitleNonFixed = styled.h1`
-  text-align: center;
-`;
-
-export const AppBody = styled.div`
-  padding-top: 65px;
-  background: linear-gradient(-45deg, #e4b4a4, #e9bbcd, #77c0b0, #7db6aa);
-  background-size: 400% 400%;
-  -webkit-animation: gradient 15s ease infinite;
-  animation: gradient 15s ease infinite;
-  display: flex !important;
-  flex-direction: column;
-  justify-content: center !important;
-`
-
-const PartyTime = styled(AppBody)`
-  padding-top: 0 !important;
-  display: block;
-  text-align: center;
-`;
-
+import { 
+  AppTitleNonFixed, 
+  AppContainer, 
+  PartyTime, 
+  AlbumArt } from './styles/App.style';
 class App extends Component<void, AppState> {
   private spotifyService: SpotifyService;
 
@@ -216,7 +198,7 @@ class App extends Component<void, AppState> {
 
   render() {
     return (
-      <div className="App">
+      <AppContainer className="App">
         { this.state.partyStarted ?
           <PartyTime className="app-body">
             <header>
@@ -224,30 +206,30 @@ class App extends Component<void, AppState> {
             </header>
             <h2>Currently Playing: </h2>
             <Timer paused={this.state.paused} skipToNextSong={this.skipToNextSong} partyOver={this.partyOver} interval={this.state.interval} numberOfSongs={this.state.numberOfSongs}></Timer>
-              { this.state.activeSong ?
+            { this.state.activeSong ?
+                <div style={{height: "100%"}}>
+                  <AlbumArt src={this.state.activeSong.album.images[0].url} alt='album art of the current track'></AlbumArt>
+                  <h3 style={{fontWeight: 'bold'}}>{this.state.activeSong.name}</h3>
+                  <h4 style={{paddingBottom: '5%'}}>{this.state.activeSong.album.artists[0].name}</h4> 
                   <div>
-                    <img src={!this.state.partyOver ? this.state.activeSong.album.images[0].url : "https://live.staticflickr.com/134/375385283_1a9b80c897_z.jpg" } alt='album art of the current track'></img>
-                    <h3 style={{fontWeight: 'bold'}}>{this.state.activeSong.name}</h3>
-                    <h4 style={{paddingBottom: '5%'}}>{this.state.activeSong.album.artists[0].name}</h4> 
-                    <div>
-                    { !this.state.paused ?
-                    <Pause style={{cursor: "pointer"}} onClick={this.pauseCurrentPlayback}/>
-                  :
-                    <PlayArrow style={{cursor: "pointer"}} onClick={this.resumeCurrentPlayback}/>
-                  } 
-                      <p>Change the interval between songs?</p> 
-                      <RangeStepInput
-                      min={5} max={120} onChange={this.changeInterval}
-                      value={this.state.interval} step={5}/>
-                      {this.state.interval} seconds 
-                  </div>
-                </div>  
-              :
-                <p>Loading playback..</p>
-              }
+                  { !this.state.paused ?
+                  <Pause style={{cursor: "pointer"}} onClick={this.pauseCurrentPlayback}/>
+                :
+                  <PlayArrow style={{cursor: "pointer"}} onClick={this.resumeCurrentPlayback}/>
+                } 
+                    <p>Change the interval between songs?</p> 
+                    <RangeStepInput
+                    min={5} max={120} onChange={this.changeInterval}
+                    value={this.state.interval} step={5}/>
+                    {this.state.interval} seconds 
+                </div>
+              </div>
+            :
+              <p>Loading playback..</p>
+            }
           </PartyTime>
         :
-          <div>
+          <div style={{height: "100%"}}>
             { this.state.user ?
               <SelectMusicPage 
                 devices={this.state.devices} 
@@ -268,7 +250,7 @@ class App extends Component<void, AppState> {
         <footer>
           <p>Made by <a href="https://www.github.com/ColemanMitch" >Cole Mitchell</a> & <a href="https://github.com/dwilliams27" >David Williams</a></p>
         </footer>
-    </div>
+    </AppContainer>
     );
   }
 }
