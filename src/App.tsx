@@ -15,6 +15,7 @@ import {
   AppContainer, 
   PartyTime, 
   AlbumArt } from './styles/App.style';
+import partyOver from "./images/partyOver.jpg";
 class App extends Component<void, AppState> {
   private spotifyService: SpotifyService;
 
@@ -34,7 +35,8 @@ class App extends Component<void, AppState> {
       interval: 10,
       numberOfSongs: 60,
       paused: false,
-      loadingDevices: true
+      loadingDevices: true,
+      partyOver: false
     }
     this.spotifyService = new SpotifyService();
     
@@ -46,6 +48,7 @@ class App extends Component<void, AppState> {
     this.pauseCurrentPlayback = this.pauseCurrentPlayback.bind(this);
     this.resumeCurrentPlayback = this.resumeCurrentPlayback.bind(this);
     this.loadDevices = this.loadDevices.bind(this);
+    this.partyOver = this.partyOver.bind(this);
   }
 
   componentDidMount(): void {      
@@ -178,6 +181,12 @@ class App extends Component<void, AppState> {
     });
   }
 
+  partyOver(): void {
+    this.setState({
+      partyOver: true,
+    })
+  }
+
   changeInterval(e) {
     const newVal = forceNumber(e.target.value);
     this.setState({interval: newVal});
@@ -197,12 +206,12 @@ class App extends Component<void, AppState> {
               <AppTitleNonFixed>Spowerfy 🍺</AppTitleNonFixed>
             </header>
             <h2>Currently Playing: </h2>
-            <Timer paused={this.state.paused} skipToNextSong={this.skipToNextSong} interval={this.state.interval} numberOfSongs={this.state.numberOfSongs}></Timer>
+            <Timer paused={this.state.paused} skipToNextSong={this.skipToNextSong} partyOver={this.partyOver} interval={this.state.interval} numberOfSongs={this.state.numberOfSongs}></Timer>
             { this.state.activeSong ?
                 <div style={{height: "100%"}}>
-                  <AlbumArt src={this.state.activeSong.album.images[0].url} alt='album art of the current track'></AlbumArt>
-                  <h3 style={{fontWeight: 'bold'}}>{this.state.activeSong.name}</h3>
-                  <h4 style={{paddingBottom: '5%'}}>{this.state.activeSong.album.artists[0].name}</h4> 
+                  <AlbumArt src={!this.state.partyOver ? this.state.activeSong.album.images[0].url : partyOver } alt='album art of the current track'></AlbumArt>
+                  <h3 style={{fontWeight: 'bold'}}>{!this.state.partyOver ? this.state.activeSong.name : ""}</h3>
+                  <h4 style={{paddingBottom: '5%'}}>{!this.state.partyOver ? this.state.activeSong.album.artists[0].name: ""}</h4> 
                   <div>
                   { !this.state.paused ?
                   <Pause style={{cursor: "pointer"}} onClick={this.pauseCurrentPlayback}/>
