@@ -24,8 +24,8 @@ It is also a refactor of an existing project that I built back in 2020 in Python
     - `npm start`
 
 #### TO DO
-* ~~Dropdown for devices instead of radio buttons~~
-* ~~Text filter for playlists~~
-* Clean up the rendering associated with playlist filtering 
-* ~~Pause/play button for playback once playback has been started~~
-* ~~Use Spotify font throughout~~
+- [x] Dropdown for devices instead of radio buttons
+- [x] Text filter for playlists
+- [ ] Clean up the rendering associated with playlist filtering 
+- [x] Pause/play button for playback once playback has been started~~
+- [x] Use Spotify font throughout~~
