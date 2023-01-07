@@ -16,16 +16,33 @@ export const SignInButton = styled.button`
 
   position: absolute;
   left: 50%;
-  -ms-transform: translate(-50%, -50%);
+  -ms-transform: translate(-20%, -20%);
   transform: translate(-50%, -50%);
 `;
 
 export const LoginAppBody = styled.div`
-  flex-direction: row;
+  flex-direction: column;
+  display: flex;
   align-items: center;
-  height: 100%;
+  justify-content: center;
+  height: 100vh;
   background: linear-gradient(-45deg, #e4b4a4, #e9bbcd, #77c0b0, #7db6aa);
   background-size: 400% 400%;
   -webkit-animation: gradient 15s ease infinite;
-  animation: gradient 15s ease infinite;
+  animation: gradient 5s ease infinite;
+`;
+
+export const InstructionsAndButton = styled.div`
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  width: 30%;
+`;
+
+export const Title = styled.h2`
+  font-size: 5rem;
+`;
+
+export const Subtitle = styled.h3`
+  font-size: 1.5rem;
 `;

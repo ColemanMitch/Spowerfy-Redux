@@ -1,3 +1,4 @@
+import { ThreeSixty } from "@material-ui/icons";
 import React from "react";
 import styled from "styled-components";
 import { device } from "./styles/sizes";
@@ -40,11 +41,12 @@ class Timer extends React.Component<TimerProps, TimerState> {
     ...this.createTimeObj(START_TIME),
   };
 
-  state = { time: { ...this.initialTimer }, songCount: 1, ticking: false };
+  state = { time: { ...this.initialTimer }, songCount: 1, ticking: false, partyOver: false };
 
   constructor(props: TimerProps) {
     super(props);
   }
+  
 
   componentDidMount() {
     this.setState({
@@ -70,51 +72,66 @@ class Timer extends React.Component<TimerProps, TimerState> {
   }
 
   tick = async () => {
-    const newTime = { ...this.state.time };
-    if (!this.props.paused) {
-      // if it's playing (not paused)
-      if (this.state.time.seconds === 0) {
-        if (this.state.time.minutes === 0) {
-          console.log("times up!");
-          this.props.skipToNextSong();
-          this.setState({
-            time: this.createTimeObj(this.props.interval), 
-            songCount: this.state.songCount + 1,
-            ticking: false,
-          });
-          return;
+    if (!this.state.partyOver) {
+      const newTime = { ...this.state.time };
+      if (!this.props.paused) {
+        // if it's playing (not paused)
+        if (this.state.time.seconds === 0) {
+          if (this.state.time.minutes === 0) {
+            if (this.state.songCount < this.props.numberOfSongs) {
+              this.props.skipToNextSong();
+              this.setState({
+                time: this.createTimeObj(this.props.interval), 
+                songCount: this.state.songCount + 1,
+                ticking: false,
+              });
+            } else
+            {
+              this.setState({
+                partyOver: true,
+              })
+              this.props.partyOver();
+            }
+            return;
+          }
+          newTime.minutes -= 1;
+          newTime.seconds = 60;
         }
-        newTime.minutes -= 1;
-        newTime.seconds = 60;
+        newTime.seconds -= 1;
+        this.setState({
+          time: newTime,
+        });
+      } else {
+        // if it's paused make sure ticking is false
+        this.setState({
+          ticking: false,
+        });
+        return;
       }
-      newTime.seconds -= 1;
-      this.setState({
-        time: newTime,
-      });
-    } else {
-      // if it's paused make sure ticking is false
-      this.setState({
-        ticking: false,
-      });
-      return;
-    }
+    } 
+    return;     
   };
 
   render() {
     return (
       <TimerContainer>
-        <DrinkCounter>
-          <h4>Currently on</h4>
-          <h1>
-            Drink {this.state.songCount}/{this.props.numberOfSongs}
-          </h1>
-        </DrinkCounter>
-        <TimeCounter>
-          <h4>Time Remaining:</h4>
-          <h1>
-            {this.state.time.minutes}m {this.state.time.seconds}s
-          </h1>
-        </TimeCounter>
+          <DrinkCounter>
+            <h4>Currently on</h4>
+            <h1>
+              Drink {this.state.songCount}/{this.props.numberOfSongs}
+            </h1>
+          </DrinkCounter>
+          <h4>
+            {this.state.partyOver && (
+            "You finished!"
+            )}
+          </h4>
+          <TimeCounter>
+            <h4>Time Remaining:</h4>
+            <h1>
+              {this.state.time.minutes}m {this.state.time.seconds}s
+            </h1>
+          </TimeCounter>
       </TimerContainer>
     );
   }
