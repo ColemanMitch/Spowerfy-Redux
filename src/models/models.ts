@@ -51,6 +51,7 @@ export interface SelectMusicProps {
   user: User;
   devices: Device[];
   playlists: Playlist[];
+  playbackDeviceId: string;
   activePlaylist?: Playlist;
   reloadDevices: () => void;
   handleDevice: (device: any) => void;
@@ -82,7 +83,7 @@ export interface User {
 }
 
 export interface Device {
-  id: number;
+  id: string;
   name: string;
 }
 
