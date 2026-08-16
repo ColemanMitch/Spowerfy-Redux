@@ -76,12 +76,23 @@ const App = () => {
 
   const fetchCurrentlyPlaying = (): void => {
     spotifyService.fetchCurrentlyPlaying().then(data => {
+      // Spotify sends 204 with no body when nothing is playing, and .json() throws on that
+      if (data.status !== 200) {
+        return;
+      }
       data.json().then((json: CurrentlyPlayingReponse) => {
         if(json.item) {
           setActiveSong(json.item);
         }
       });
     });
+  }
+
+  // Spotify needs a moment before currently-playing reports the new track,
+  // and sometimes it takes longer than one try
+  const refreshCurrentlyPlaying = (): void => {
+    setTimeout(() => fetchCurrentlyPlaying(), 1000);
+    setTimeout(() => fetchCurrentlyPlaying(), 2500);
   }
 
   const startPlayback = (playlist: Playlist): void => {
@@ -96,9 +107,7 @@ const App = () => {
               setPartyStarted(true);
               setActivePlaylist(playlist);
               setPaused(false);
-              setTimeout(() => fetchCurrentlyPlaying(), 1000);
-              // Sometimes currently playing fro spotify doesnt update for a bit
-              setTimeout(() => fetchCurrentlyPlaying(), 2500);
+              refreshCurrentlyPlaying();
             });
           }), 1000);
         }
@@ -107,38 +116,18 @@ const App = () => {
   }
 
   const skipToNextSong = (): void => {
-    // Wait for skip song call to finish, then read the body
-    spotifyService.skipSong().then(res => {
-      res.body?.getReader().read().then(body => {
-        if(body?.done) {
-          // Refresh currently playing since we know new song is now playing
-          setTimeout(() => fetchCurrentlyPlaying(), 1000);
-        }
-      });
-    });
+    // Refresh currently playing since we know a new song is now playing
+    spotifyService.skipSong().then(() => refreshCurrentlyPlaying());
   }
 
   const pauseCurrentPlayback = (): void => {
     setPaused(true);
-    spotifyService.pauseCurrentPlayback().then(res => {
-      res.body?.getReader().read().then(body => {
-        if(body?.done) {
-          // Refresh currently playing since we know new song is now playing
-          setTimeout(() => fetchCurrentlyPlaying(), 1000);
-        }
-      });
-    });
+    spotifyService.pauseCurrentPlayback().then(() => refreshCurrentlyPlaying());
   }
 
   const resumeCurrentPlayback = (): void => {
     setPaused(false);
-    spotifyService.resumeCurrentPlayback().then(res => {
-      res.body?.getReader().read().then(body => {
-        if(body?.done) {
-          setTimeout(() => fetchCurrentlyPlaying(), 1000);
-        }
-      });
-    });
+    spotifyService.resumeCurrentPlayback().then(() => refreshCurrentlyPlaying());
   }
 
   const endParty = (): void => {
