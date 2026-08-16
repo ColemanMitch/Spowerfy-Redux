@@ -1,10 +1,3 @@
-export interface TimerState {
-  time: TimerCount; 
-  songCount: number;
-  ticking: boolean;
-  partyOver: boolean;
-}
-
 export interface TimerProps {
   skipToNextSong: () => void;
   partyOver: () => void;
@@ -18,33 +11,9 @@ export interface TimerCount {
   minutes: number;
 }
 
-export interface AppState {
-  authenticated: boolean;
-  serverData?: unknown;
-  filterString: string;
-  playbackDeviceId: string;
-  activePlaylist?: Playlist;
-  playlists: Playlist[];
-  filteredPlaylists: Playlist[];
-  partyStarted: boolean;
-  partyOver: boolean;
-  user?: User;
-  activeSong?: Song;
-  devices: Device[];
-  loadingDevices: boolean;
-  songLoaded: boolean;
-  interval: number;
-  numberOfSongs: number;
-  paused: boolean;
-}
-
 export interface PlaylistsProps {
   playlists: Playlist[];
   startPlayback: (playlist: Playlist) => void;
-}
-
-export interface PlaylistsState {
-  playlistFilter: string;
 }
 
 export interface SelectMusicProps {
